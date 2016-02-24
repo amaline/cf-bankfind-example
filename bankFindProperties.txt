@@ -1,0 +1,4 @@
+APP_SERVER_HOST_PREFIX=https://odata.fdic.gov;
+CONTEXT_ROOT=/v1/financial-institution;
+LEGACY_APP_HOST_PREFIX=https://www5.fdic.gov;
+SEAF_APP_HOST_PREFIX=https://efr.fdic.gov;

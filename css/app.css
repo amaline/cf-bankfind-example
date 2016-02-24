@@ -1,0 +1,703 @@
+/* fdic stuff */
+html, body { margin: 0 auto; padding: 0; height: 100%; 
+             background: #f2f2f2 scroll center top transparent; 
+             font-family: arial, helvetica, sans-serif; color: #000000;
+             font-size: 10pt;
+             line-height: 1.25;
+            }
+#site-container {max-width: 990px; min-height: 100%; position:relative;}
+#site-grid-container {max-width: 100%; overflow:hidden;}
+
+.break-word {
+  word-wrap: break-word;
+}
+
+#skipNav {margin:-20px 0px; padding:0px;}
+#skipNav a {
+    position:absolute;
+    left:-10000px;
+    top:auto;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+ }
+
+#skipNav a:focus, #skipNav a:active, #skipNav a:hover {
+    position:absolute;
+    left:0;
+    top:0;
+    width:auto;
+    height:auto;
+    overflow:visible;
+    background-color:#FF3;
+    border: 1px dotted #000;
+ }
+
+/* Warp Stuff */
+#warp { font-family: arial, lucida, sans-serif; font-size: 0.9em;  } 
+.indexLeftColumn {max-width: 613px;}
+.indexRightColumn {max-width: 355px;}
+.resultsLeftColumn {max-width: 184px;}
+.resultsRightColumn {max-width: 800px;min-width: 257px;}
+
+.borderAllThinBlack {border: 1px solid black;}
+.boxShadowAll {box-shadow: 1px 1px 2px 2px #888888;}
+.boxShadowbr {box-shadow: 1px 4px 5px #888888;}
+.hrule {margin: 0; border-top: 1px solid #717070; border-bottom: 1px solid #717070; height: 0px;}
+.smallText {font-size: 0.9em;}
+.active-status { color: rgb(5,144,69) !important }
+.inactive-status { color:#EF3024 !important;}
+.inactive { color:#EF3024 !important; font-size: 11pt; font-weight:bold;}
+.errorHighlight {border-color: #8B0000 !important;}
+.validHighlight {border-color: #5E5F5E !important;}
+
+#errorMessages {font-weight: bold; color: #8B0000}
+.reason {font-weight:bold; font-size:11pt;}
+
+.mainNavBar {overflow: hidden;}
+.mainNavBar a:link, .mainNavBar a:visited {text-decoration:none; color: #236eae;}
+.mainNavBar a:hover, .mainNavBar a:active {text-decoration: underline; }
+#bank_find_mobile {display: none;}
+
+.searchBankGradient { background: #f0f8f0 url(../images/searchBankGradient.png) repeat-x left top; }
+.gtp { background: #F0F0F8 url(../images/grad.png) repeat-x left top; }
+
+.section h1 { margin: 0; font-size: 1.5em; color:rgb(66,66,66); font-family: arial, lucida, sans-serif; padding-top: 5px;}
+.section h1 a {cursor: default;text-decoration: none; color:rgb(66,66,66)}
+.section h2 { margin: 0; font-size: 0.95em; color:rgb(66,66,66); font-weight: bold;}
+.section .resultsCriteriaHeader { margin: 0; color:rgb(94,95,94); font-weight: bold; padding: 5px; overflow: hidden;}
+.section .resultsCriteriaHeader {float:left;  }
+
+.section .resultsCriteriaHeader .searchValue {color: rgb(60,87,167);}
+.section .resultsCriteriaHeader .expandResultsCriteria {color: rgb(60,87,167); float: right; cursor: pointer;}
+.section .resultsCriteriaHeader .expandResultsCriteria a {color: rgb(60,87,167); text-decoration: none;}
+.section .resultsCriteriaHeader .expandResultsCriteria .arrow {color: rgb(60,87,167); display: inline; padding-bottom: 2px;}
+ @media print {a[href]:after {content: none !important;}}
+
+#tabCategories {padding: 0px 0px 8px 0px;}
+.dfHorizontalTabs {float: left;width: 100%;}
+#dfHorizontalTabs .nav.nav-pills.df_panels {height: 20px;}
+#dfHorizontalTabs .nav.nav-pills.df_panels li {color: #236EAE;font-size: 12pt;}
+#dfHorizontalTabs .nav-pills.df_panels > li.active > a, 
+                  .nav-pills.df_panels > li.active > a:focus, 
+                  .nav-pills.df_panels > li.active > a:hover {background-color: #374A60; border: 1px solid #374A60; border-radius: 2px; box-shadow: 1px 5px 6px #374A60;}
+/*table.dataTable thead th, table.dataTable thead td {border-bottom: 1px solid #f2f2f2;}*/
+.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, 
+.dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, 
+.dataTables_wrapper .dataTables_paginate {color: #000000;}
+
+#showSearchResults {display: block;}
+#resultsFilterContainer {display: block;}
+#showNoSearchResults {display: none;}
+.bankFindHome td {font-size: 11pt;}
+#js-goBackToSearchResults {font-size: 9pt; margin:10px 35px 5px 25px; color:#084999; font-weight:bold;}
+#name {font-size:11pt;}
+#findBankContainer {min-width: 229px;}
+
+#searchTextFilter label {font-size: 0.95em}
+.section #searchFormContainer {overflow: hidden}
+.section .label {float: left; width: 100px; font-weight: bold;}
+.section input {float:left; width: 165px; border: 1px solid rgb(94,95,94);}
+.section input[type="checkbox"] {float:left; width: auto;}
+.section select {float:left; width: 167px; border: 1px solid rgb(94,95,94); box-shadow: 1px 2px 2px #888888;}
+.section .findButtonContainer {height: 46px; float: right;}
+.tool {width:187px; position: relative; cursor: pointer;}
+.tool a {cursor: default;text-decoration: none; color:rgb(66,66,66)}
+.tool .subHeader {font-size: 0.65em;}
+.tool .toolText {height: 175px;}
+.section .bottomLinkBar {cursor: pointer; height: 31px; border-width: 0 1px 1px 1px; border-style: solid; background-repeat: repeat-x; background-position: left top; }
+.section .sinkBottomLinkBar { position:absolute;bottom:0; width:99%}
+.section .bottomLinkBar .text a {color: #fff; font-weight: bold; font-size: 1.21em; float: left; text-decoration: none; cursor: pointer; }
+.section .bottomLinkBar .arrow {background:url(../images/bottomLinkBarArrow.gif) no-repeat left bottom; float: right; height: 17px; width: 17px; padding-top: 2px;}
+.section .lightBlueBGGradient {background-image:url(../images/lightBlueGradient.png); border-color: #9999ff;}
+
+.section ul { margin-left: 30px; }
+.section li { list-style: circle; }
+
+.section .narrowSubsection {display: inline-block;}
+.section .narrowSubsection input {width: 145px;}
+.section .narrowSubsection .searchWithinButton {margin: 10px 20px 0 0;}
+
+.printExportResultsButton {margin: 5px 10px 5px 0;}
+.printExportDetailsButton {margin: 0px 10px 0px 0;}
+
+.section .subsection {display: inline-block; width: 95%;}
+.section .subsection { border-top: 1px dotted #999}
+.section .subsection .field {clear: both;}
+.section .subsection .field input {margin-top: 3px;}
+.section .subsection .label {color:black; float: left; font-weight: normal;}
+
+.acorddetails {border-width: 0 1px 1px 1px; border-style: solid; border-color: #999999;  color: #000000; font-size: 0.825em; }
+.acorddetails .header {line-height: 28px; cursor: pointer;font-weight: bold; overflow: hidden}
+.acorddetails .header div{padding-left: 10px; padding-right: 10px; float: left; }
+.acorddetails .header a{text-decoration: none; }
+.acorddetails.open .header {border-bottom: 1px solid #999; }
+.acorddetails .header img{float: right; }
+.acorddetails .detail {clear: both; font-weight: normal; background: rgb(251, 242, 213) url(../images/whiteToYellowGradient.png) repeat-x left top;}
+.acorddetails .detail > p:first-child {margin-top: 0; padding-top: 10px;}
+.acorddetails .detail > p:last-child {margin-bottom: 0; padding-bottom: 10px; }
+
+#faqs {min-width: 229px;}
+#fdicDataAndStats {min-width: 229px;}
+
+.fdicdata h2{ font-size: 0.95em; font-weight: bold;}
+.fdicdata #institutionData { font-size: 0.9em; width: 100%; color:rgb(66,66,66); min-width: 230px;}
+.fdicdata #institutionData .header {line-height: 1.5em; text-align: center; font-weight: bold;padding: 3px 18px 3px 10px;border: 1px solid #999999;background: rgb(108,165,216) url(../images/tableHeaderBackground.png) repeat-x top left;}
+.fdicdata #institutionData .section { overflow: hidden; border-color: #999999; border-width: 0 1px 1px 1px; border-style: solid;}
+.fdicdata #institutionData .info { text-align: right; line-height: 1.1em; padding: 5px; margin: 0;}
+.fdicdata #institutionData .info a { text-decoration: none; border-bottom:1px dotted;color:rgb(66,66,66);}
+.fdicdata .smallText {font-size: 0.85em;}
+
+a.tooltipIndicator { text-decoration: none; border-bottom:1px dotted; color:#000000;}
+ .tooltipIndicator + .tooltip > .tooltip-inner {background-color:#537291; color: #ffffff; margin: 0px 5px 0px 5px;
+                                              font-size: .9em; border:none; text-align:left;}
+.popover {
+    font-family: Arial,sans-serif, "Helvetica Neue",Helvetica; font-size: .9em; font-style: normal;
+    font-weight: 400; letter-spacing: normal; line-height: 1.42857; text-align: start; text-shadow: none;
+    text-transform: none; white-space: normal; word-break: normal; word-spacing: normal; word-wrap: normal;
+    background-color:#537291; color: #ffffff; text-align:left;}
+
+.greyText {color:#666666; font-size:13pt; font-weight:bold;}
+.js-demDate {color: #084999; font-weight:bold; font-size:10pt;margin-left:-1px;}
+#js-searchCriteria {padding:10px 5px 0px 0px;}
+
+.detailHeader {color:#000000;}
+.detailHeader h1 {margin: 0; padding: 0; font-size: 1.8em; font-family: arial, lucida, sans-serif; }
+.detailHeader h3 {margin: 0; padding: 0; font-size: 1.4em; font-family: arial, lucida, sans-serif; display: inline-block;}
+.detailHeader .greyText {color:#000000;}
+.detailHeader #headerCertNumber {font-size: 0.8em; }
+
+#detailNavBar {height: 40px; width: auto; font-weight: bold; font-size: 0.8em; }
+#detailNavBar ul {margin: 0px;}
+#detailNavBar li {height: 25px; background-color: #909090; margin-top: 5px; float: left; border-width: 1px 1px 0 1px; border-style: solid;padding-top: 10px; text-align: center;}
+#detailNavBar a {text-decoration: none;;}
+#detailNavBar .tabOn a {color:rgb(66,66,66);}
+#detailNavBar .tabOff a {color: white;}
+#detailNavBar .leftCap {width: 1.55%; border-width: 0 1px 0 0; border-color: white;padding: 0; height: 35px;}
+#detailNavBar .rightCap {width: 15%; border: 0; overflow: hidden;}
+#detailNavBar .tabOn {width: 16.44%; cursor: pointer; font-size: 1.2em; padding-top: 12px;  height: 27px; margin: 0;  border-color: #aaa; background-color: white; -moz-border-radius-topleft: 9px; -webkit-border-top-left-radius: 9px; -khtml-border-top-left-radius: 9px; border-top-left-radius: 9px;-moz-border-radius-topright: 9px; -webkit-border-top-right-radius: 9px; -khtml-border-top-right-radius: 9px; border-top-right-radius: 9px}
+#detailNavBar .tabOff {width: 16.44%; cursor: pointer; font-weight: normal;  border-top: 0; border-left: 0; border-color: white; -moz-border-radius-topleft: 9px; -webkit-border-top-left-radius: 9px; -khtml-border-top-left-radius: 9px; border-top-left-radius: 9px;-moz-border-radius-topright: 9px; -webkit-border-top-right-radius: 9px; -khtml-border-top-right-radius: 9px; border-top-right-radius: 9px}
+#headerCertNumber {font-size: 1em; }
+
+#overview #graph .image {float: left;}
+#overview #graph .text {height: 65px;}
+#overview #graph .value {color:rgb(66,66,66); font-weight: bold;}
+#overview #graph .label {color:#555}
+#overview #graph .active,#overview .graph .inactive {font-weight: bold;}
+#overview #bankDetails {color:rgb(66,66,66); overflow: hidden; background-color: #E0E0E0}
+#overview #bankDetails #bankHoldingCompany{display: none;}
+#overview #bankDetails #consumerAssistanceWebsite{line-height: 2.4em;}
+#overview #bankDetails .label {float: left; width: 145px; font-weight: bold;}
+#overview #bankDetails .value {float: left; width: 170px; }
+.overview_details {font-size:9pt;}
+#contactSingle {padding-bottom:10px;}
+#ovrpd {padding-bottom:4px;}
+
+#locations {display: none; font-size: 0.9em; }
+#locations .showLocations {display: block;  color:#000000; margin-top:-30px;}
+#locations .showNoLocations {display: none; font-weight: bold; font-size: 1.188em; clear: both; text-align: center; padding-top: 15px; }
+#locations #locationNavBar {width: 100%; float: left; margin-top: 5px;}
+#locations #locationNavBar div {float: left; padding-right: 20px; padding-top: 5px; }
+/*#locations #locationNavBar .linkOn {text-decoration: underline; color: blue; cursor: pointer;}*/
+#locations #locationNavBar .linkOff a {text-decoration: none; cursor: auto; font-weight:bold;}
+#locations #results {display: block; clear: both;}
+#locations #filteredByStateHeader {font-weight: bold;}
+
+#byState {display: none; clear: both;}
+#byState .nameCountColumn {float: left; padding-bottom: 20px;}
+#byState .nameCountColumn .header {margin: 0;border:0; clear: both; overflow: hidden;padding: 6px; text-decoration: none}
+#byState .nameCount {margin: 0;border:0;padding: 3px; clear: both; overflow: hidden;}
+#byState .even {background-color: #f2f2f2;}
+#byState .odd {background-color: #FFFFFF;}
+#byState .name  {float: left;padding: 3px;}
+#byState .count  {padding: 3px;text-decoration: none; color: #236EAE;cursor: pointer;}
+.byState-wrapper { height: 300px; width:60%; overflow-y: auto;  box-shadow: 1px 5px 6px #999999;}
+#byState td {padding:10px 5px 10px 80px; font-size:11pt;}
+#byState th {font-size:11pt;}
+
+#byState tbody {overflow-y: auto;}
+
+
+/*#history {display: none;}*/
+#history .header {overflow:hidden; clear: both;}
+#history .header h5 {float: left; margin: 0;}
+#history .header .field input {margin-top: 3px;}
+#history #showHistory {display: block}
+#history #showNoHistory {display: none; font-weight: bold; font-size: 0.9em; clear: both; text-align: center; padding-top: 15px; }
+#historyTable[style] {width: 100% !important;}
+#historyTable td {padding:5px; font-size:10pt;}
+#history {background-color:#FFF;}
+#showAcquisitions {margin-left:-40px; color:#084999;}
+.well{ background-color:#FFF;margin-top:5px; padding:5px 10px;}
+
+/*#identifications {background-color:#FFF; color:#000000;}*/
+#identifications {display: none;}
+#identifications .idenRow {margin: 0;border:0;padding: 3px; clear: both; overflow: hidden;}
+#identifications th {font-size:11pt; font-weight:bold; background-color:#537291; color: #ffffff; height: 25px;}
+#identifications tr.odd { background-color: #FFFFFF; }
+#identifications tr.even { background-color: rgb(238,246,255); }
+/*#identifications .even {background-color: rgb(238,246,255);}
+#identifications .odd {background-color: white;}*/
+#identifications .label  {float: left;padding: 3px; font-weight: bold; width: 35%; }
+/*#identifications .value  {float: left;padding: 3px;}*/
+#identifications td {padding:8px 20px; margin:20px;}
+
+#financials {display: none; overflow: hidden;}
+#financials .header {font-weight:bold; font-size:14pt;}
+#financials #headerDetails {font-style:italic; font-size:0.8em;}
+#financials #headerDetails .left {float: left; width: 185px;}
+#financials #headerDetails .right {float: left; width: 185px;}
+#financials .label {padding-left:30px; width: 185px; font-weight: bold;}
+#financials .value {width: 185px; text-align:right; padding-right:5px; font-size: 10pt;}
+#financials tr.odd { background-color: #FFFFFF; }
+#financials tr.even { background-color: rgb(238,246,255); }
+/*#financials .even {background-color: rgb(238,246,255);}
+#financials .odd {background-color: white;}*/
+#financials tr { padding-left:15px;}
+#lastFinancials {font-size:11pt;}
+#financials .table > tbody > tr > td, .table > tbody > tr > th, 
+.table > tfoot > tr > td, .table > tfoot > tr > th, 
+.table > thead > tr > td, .table > thead > tr > th {border-top: 1px solid #ddd; line-height: 1.2;padding: 8px 20px; vertical-align: top;}
+
+.table-bordered { border-radius: 2px; box-shadow: 1px 3px 4px #999999;}
+.table-striped > tbody > tr:nth-of-type(2n+2) {background-color: #F2F2F2;}
+
+.panel-footer {background-color: #fff;border-bottom-left-radius: 3px;border-bottom-right-radius: 3px; border-top: thin;padding:0px;}  
+
+/*Bank Find Home page style*/
+.bnkformContainer {border: 1px solid #cccccc;padding: 30px 5px 35px 2px;margin: 5px 3px 50px 10px;background-color: rgba(0, 0, 0, 0.067); height:auto;}
+.bnkformContainer .row {padding-bottom:20px;}
+.ssContainer {border: 1px solid #d7d7d7;background-color: #F5F5F5;padding-top: 20px;padding-bottom: 30px;}
+.da-container {border: 1px solid #d7d7d7;background-color: #FFFFFF;padding-top: 20px;padding-bottom: 30px; }
+
+.btn { padding: 5px 15px 5px 15px; border-radius: 4px;}
+.btn-default { margin-left:15px; }
+ #findButton {color: #ffffff;font-size: 14pt;
+              background-color: #374A60;border: 1px Solid #374A60;border-radius: 3px; box-shadow: 1px 5px 6px #374A60;}
+ #clearButton {font-size: 14pt;border: 1px Solid #FFFFFF; border-radius: 4px; box-shadow: 1px 5px 6px #999999; background-color: #ffffff; color:#000000;}
+ 
+.cssPageTitle { width: 100%; font-size:13pt; font-weight:600;}
+.cssPageDesc {font-size: .85em; padding-top: 12px;padding-bottom: 12px;}
+ 
+ .bankFindHome .cssPageTitle {border-bottom: 1px solid #D3D3D3;}
+ .bankFindHome .table > tbody > tr > td, .table > tbody > tr > th, 
+               .table > tfoot > tr > td, .table > tfoot > tr > th, 
+               .table > thead > tr > td, .table > thead > tr > th {border-top: none; line-height: 1.2em; padding: 4px; vertical-align: top;}
+ .bankFindHome th {font-size: 13pt; text-align: right;padding-bottom: 15px; line-height:1.2em;}
+ .bankFindHome select {background: none repeat scroll 0 0 #FFFFFF;height: 25pt;padding-left: 5px;border: 1px solid #ccc;
+           border-radius: 4px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset; font-size: 11pt;}  
+ .bankFindHome .panel-default > .panel-heading {background-color: #f5f5f5;border-color: #ddd;}
+ .bf-home-panel {background-color: #F5F5F5;}
+
+ .search_buttons_section {float: right; padding-top: 23px; padding-bottom:18px;}
+ .search_buttons_section .btn.btn-primary {font-size: 13px;color: #ffffff;background: #7A99B8;border: 1px solid #7A99B8;border-radius: 3px;}
+ .search_buttons_section .btn.btn-default {font-size: 13px;color: #6D6E71;background: #ffffff;border: 1px solid #E5E5E5;border-radius: 4px;}
+ 
+ .links {font-size: 11pt;color: #084999;padding:15px 5px; text-decoration:none;}
+  hr { border-bottom: 1px Solid #C9C9C9;}
+  .h4, h4 {font-size: .938em;}
+ 
+   /*.bankFindHome label {font-weight: bold;font-size: 13pt;color: #000000;}*/
+  placeholder {font-size: 14pt;color: #A1A1A1;}
+  .shadow-box {Box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.067);}
+  
+  .bkfPanelHead {background-color: #fafafa;background-image: linear-gradient(to bottom, #ffffff, #f2f2f2);background-repeat: repeat-x;border: 1px solid #d4d4d4;
+                 box-shadow: 0 1px 4px rgba(0,0,0,0.067);font-size: 16pt; text-align: center;}
+ 
+   /*.iframeWrapper {
+        margin: 60px 40px 40px 85px;
+        border:1px solid #9f9f9f; background:#f0f0f0;
+        width: 90%; height:85%; z-index:99999;
+    }*/
+ /*Bank Find Home page style*/
+
+ /*Bank Find Results page style - start */
+   #main_content {padding: 20px 10px 0px 10px; margin-right:10px;}
+
+   #searchCriteria {font-size:10pt; color:#084999; font-weight:bold;}
+   #refineCriteria {font-size:10pt; color:red; font-weight:bold; padding-bottom:2px;}
+   #js-searchCriteria{color: #999999; font-weight:bold; font-size:12pt;}
+   .searchResultContainer {margin: 2px; padding: 10px;border: 1px solid #d7d7d7;overflow-y: auto;overflow-x: hidden;}
+  
+  .panel-heading .panel-footer {background-color:#ffffff;padding:0px;}
+  .table > tbody > tr.even > td.active {background-color:#ffffff;}
+   @media print { a[href]:after {content: none !important;}}
+   .pagination > .active > a, .pagination > .active > a:focus, 
+   .pagination > .active > a:hover, .pagination > .active > span, 
+   .pagination > .active > span:focus, .pagination > .active > span:hover {background-color: #537291;border-color: #537291;color: #fff;cursor: default;z-index: 2;}
+   .bottom {display:none;}
+  
+   /*.dataTables_info {display:none;}*/
+   .resultsPageHead {border-radius: 2px; padding:3px; border-bottom: 1px solid #D3D3D3; margin: 0px 1px;}
+  
+   .cs-fontb{ font-size:11pt;}
+   .cssIconWrapper  { height:15px; width:30px; padding-right: 10px; float:right;}
+   .tmpl-name{color:#000000;}
+  /*.bkDetailsContainer #locationsTable_info{ display:none;}*/
+  .resultSummaryContainer {width: 100%;height: 30px;padding: 5px 10px 5px 10px;}
+  .criteriaCarouselContainer {width: 100%;height: 60px;margin: 0;padding: 0;}
+  .resultTableContainer {width: 100%;height: 100%;}
+  /*.resultTableHead {background: #f2f2f2 none repeat scroll 0 0; border: medium none; color: #ffffff; font: 13px; height: 40px; padding: 10px 15px;}*/
+  .dataTables_length label,  .dataTables_paginate, .dataTables_info  {font-size:9pt; font-weight:bold;}
+   #divResultTable_paginate {float:right;}
+   #finSnapShot {font-size:13pt; font-weight: bold; text-align:left; padding: 8px;}
+   #locationsTable > #searchCriteria {padding:0px 0px 20px 0px;}
+   /*#historyTable_info {display:none;}*/
+  .resultTableContainer td {font: 9pt}
+   /*.resultTableContainer td a {color: #428bca;text-decoration: none;}*/
+   .mobile_search_container_background {display: none;}
+    .search_container_background { display: block;}
+    .container .jumbotron, .container-fluid .jumbotron { padding:5px; background-color:#FFFFFF; font-size:10pt;border: 1px Solid #E4E4E4; box-shadow: #E4E4E4 3px 3px;}
+    .table > tbody > tr > td, .table > tbody > tr > th,
+    .table > tfoot > tr > td, .table > tfoot > tr > th,
+    .table > thead > tr > td, .table > thead > tr > th {
+        border-top: 1px solid #ddd;
+        line-height: 1.2;
+        padding: 4px;
+        vertical-align: top;
+     }
+
+.table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > th { text-align:center;}
+#panel-footer {text-align:right; padding:0px 5px 20px 0px;}
+
+   /*Bank Find Results page style - end */
+   /* Portrait phones and smaller  test*/
+@media screen and (max-width: 980px) {
+   
+   .bnkformContainer {
+        background-color: #f2f2f2;
+        border: 1px solid #cccccc;
+        margin: 3px;
+        padding: 10px 5px 10px 2px;
+        height:auto;
+    }
+    #clearButton {font-size: 9pt; border: 1px outset #D3D3D3; border-radius: 2px; box-shadow: 1px 4px 5px #888888;}
+    #findButton {border-radius: 2px; color: #ffffff; font-size: 9pt;}
+    .bankFindHome .table > tbody > tr > td, .table > tbody > tr > th, 
+    .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, 
+    .table > thead > tr > th {line-height: 1.5em;}
+    .bankFindHome th {font-size: 12pt; font-weight: 900; line-height: 1.2em; padding-bottom: 15px; text-align: right;}
+    .bankFindHome td {font-size: 9pt;}
+    #searchCriteria {font-size: 9pt;}
+    #refineCriteria {font-size: 9pt;}
+    #overview #bankDetails #bankHoldingCompany {display: block;}
+
+    #overview #bankDetails {
+        width: 94%;
+        -moz-border-radius-topleft: 0px;
+        -webkit-border-top-left-radius: 0px;
+        -khtml-border-top-left-radius: 4px;
+        border-top-left-radius: 0px;
+        -moz-border-radius-topright: 0px;
+        -webkit-border-top-right-radius: 0px;
+        -khtml-border-top-right-radius: 0px;
+        border-top-right-radius: 0px;
+    }
+
+    #contactSingle {padding-bottom:5px;}
+
+    #tabCategories {padding: 0px 0px 8px 0px;}
+    #dfHorizontalTabs {float: left; width: 100%;}
+    #dfHorizontalTabs .nav.nav-pills.df_panels {height: 40px;}
+    #dfHorizontalTabs .nav.nav-pills.df_panels li {color: #236EAE; font-size: 10pt;}
+    #dfHorizontalTabs .nav-pills.df_panels > li.active > a,
+    .nav-pills.df_panels > li.active > a:focus,
+    .nav-pills.df_panels > li.active > a:hover {
+        background-color: #374A60;
+        border: 5px solid #374A60;
+        border-radius: 5px;
+        box-shadow: 3px 5px 6px #374A60;
+        padding: 6px 40px 6px 2px;
+    }
+    #showAcquisitions { margin-left: -20px;}
+    #ovrpd {padding-bottom: 2px;}
+    .unit {font-size:8pt;}
+}
+
+@media (width:768) {
+  
+
+  
+
+ 
+}
+
+ @media (max-width: 737px) {
+    #bank_find_main { display: none;}
+    #bank_find_mobile { display: block; background-image: url("../images/header_seal_360X640.png"); 
+                        padding: 100px 20px 180px 20px;}
+	.bf_selections {width: 100%; border: 1px solid #F2F2F2;}
+    .bf_buttons { width: 100%; background-color: #FFFFFF; border: 1px solid #F2F2F2; padding-left: 10px;}
+    .bf_buttons h4 {width: 100%; color: #000000; font-weight: bold; font-size: 16px;}
+    .bf_buttons h4 .button_arrow {width: 9px; float: right; margin-right: 30px;}
+    .mb_hist {font-size:9pt; color:#084999;}
+    .greyText {font-size:10pt;}
+   
+    .bf_form {background-color: #F2F2F2;padding: 25px;}
+    .mobile_search_container_background { margin: -5px; padding:5px; display: block; background: #F2F2F2; border: 1px solid #000000;}
+    .mobile_summary {max-height: 110px; font-size: 11px;}
+    .mobile_summary p {padding: 5px 10px;}
+    .mobile_heading {padding-top: 10px;background: #000000;height: 40px;}
+    .mobile_heading .back_link {width: 60px;float: left; padding-left: 10px;}
+    .mobile_footer hr {display: block; margin-top: 25px; margin-left: 25px; margin-right: 25px; border-style: inset; border-width: 1px; border-color: #ccc;}
+    .mobile_search_buttons_section {float: right; width: 180px;}
+    .mobile_search_buttons_section .btn.btn-primary {font-size: 13px; color: #ffffff; background: #7A99B8; border: 1px solid #7A99B8; border-radius: 3px;}
+    .mobile_search_buttons_section .btn.btn-default {font-size: 13px; color: #6D6E71; background: #ffffff; border: 1px solid #E5E5E5;}
+    .container .jumbotron, .container-fluid .jumbotron { padding:0px 3px; background-color:#FFFFFF; font-size:8pt;}
+	#bankFindDescription {display: none;}
+    #acquiredFilterCheckboxDiv {font-size: 8pt;}
+    #compareBanks, #selectDataset {margin-left: 5px !important}
+    #findBankContainer {padding-bottom: 0 !important}
+    #pageTitle {display:none;}
+    #resultsFilter h1 {display:none;}
+
+    #clearButton {font-size: 8pt;border: 1px outset  #D3D3D3;border-radius: 2px;  box-shadow: 1px 4px 5px #D3D3D3;}
+    .cs-button-grey {font-size: 8pt;border: 1px outset  #D3D3D3;border-radius: 2px;  box-shadow: 1px 4px 5px #D3D3D3;}
+    #findButton {border-radius: 2px;color: #ffffff;font-size: 8pt;}
+    
+    #js-goBackToSearchResults{font-size:10pt; padding:0px;}
+    #history .header {overflow:hidden; clear: both;}
+    .cs-fontb {font-size: 8pt;}
+    label {color: black; font-size:.9em; padding-top: 2px;}
+    .cssPageTitle {font-size:10pt; font-weight:bold; padding-top:6px;}
+    .links {font-size: 9pt;}
+     
+	.section h1 {cursor: pointer; background-color: #124C8F; border-color: #009900; margin: 0; font-size: 1.5em; color:white; font-family: arial, lucida, sans-serif; padding-left: 15px; padding-top: 5px;-moz-border-radius-topleft: 4px; -webkit-border-top-left-radius: 4px; -khtml-border-top-left-radius: 4px; border-top-left-radius: 4px;-moz-border-radius-topright: 4px; -webkit-border-top-right-radius: 4px; -khtml-border-top-right-radius: 4px; border-top-right-radius: 4px; -moz-border-radius-bottomleft: 4px; -webkit-border-bottom-left-radius: 4px; -khtml-border-bottom-left-radius: 4px; border-bottom-left-radius: 4px; -moz-border-radius-bottomright: 4px; -webkit-border-bottom-right-radius: 4px; -khtml-border-bottom-right-radius: 4px; border-bottom-right-radius: 4px}
+	.section h1 a {cursor: pointer;text-decoration: none; color:white}
+	.section h1.open {-moz-border-radius-bottomleft: 0; -webkit-border-bottom-left-radius: 0; -khtml-border-bottom-left-radius: 0; border-bottom-left-radius: 0; -moz-border-radius-bottomright: 0; -webkit-border-bottom-right-radius: 0; -khtml-border-bottom-right-radius: 0; border-bottom-right-radius: 0}
+	.tool {width:96% !important;}
+	
+	.indexRightColumn {width: 90%}
+	.mobileNavWrapper.open {display: block;}
+	.mobileStretchHeader {width:100% !important; }
+	
+	.indexLeftColumn {padding-bottom: 0 !important}
+
+    .da-container {overflow: hidden;}
+    .dataTables_info {display:block;}
+    .bkfPanelHead {background-color: #fafafa;background-image: linear-gradient(to bottom, #ffffff, #f2f2f2);background-repeat: repeat-x;
+                   border: 1px solid #d4d4d4;box-shadow: 0 1px 2px rgba(0, 0, 0, 0.067);color: #000000;font-size: 10pt;text-align: center;}
+    .bankFindHome select {background: #ffffff none repeat scroll 0 0; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+                          color: #000000; font-size: 8pt; padding-left: 5px;}
+    .bankFindHome td { font-size: 9pt;}
+    /*BankFind Mobile Home Page*/
+
+    .search_container_background { display: block;}
+
+    .mobile_search_container_background {padding:3px 5px; display: block; background: #ffffff;}
+    .mobile_summary {max-height: 110px; font-size: 11px;}
+    .mobile_summary p {padding: 5px 10px;}
+    .mobile_heading {padding-top: 10px; background: #F2F2F2; height: 40px;}
+    .heading_title {text-align: center;}
+
+    .mobile_heading .back_link {width: 60px; float: left; padding-left: 10px;}
+    .mobile_search_categories ul {list-style-type: none; margin-left: -20px; margin-right: 20px; }
+    .mobile_search_categories ul li {height: 40px; background: #374A60;}
+    .mobile_search_categories ul li:hover {cursor: pointer;}
+    .mobile_search_categories ul li .category_title {position: relative; top: 10px; margin-left: 10px; color: #fff;}
+
+    .category_arrow { width: 20px; background: #fff; float: right; height: 40px; padding: 10px 0 0 5px;}
+    #contactSingle {padding-bottom:2px;}
+    #locations {margin-top:2px; font-size:0.8em;}
+    #locations #locationNavBar div {float: left; padding: 2px 0px 0px 2px; }
+    #history {background-color:#FFF;}
+    #financials > .well {background-color:#FFF;}
+    #history .header h5 {float: left; margin: 0;}
+    #history .header .field input {margin-top: 3px;}
+    #history #showHistory {display: block}
+    #history #showNoHistory {display: none; font-weight: bold; font-size: 0.9em; clear: both; text-align: center; padding-top: 15px; }
+    #historyTable td {font-size: 8pt; padding: 2px;}
+
+    #identifications {display: none;}
+    #identifications .idenRow {margin: 0;border:0;padding: 3px; clear: both; overflow: hidden;}
+    #identifications label  {float: left;padding: 3px; font-weight: bold; width: 35%; font-size:8pt; }
+    #identifications .value  {float: left;padding: 3px;}
+    #identifications {background-color:#FFF;}
+   
+    #identifications td {margin: 10px;  padding: 2px 8px;}
+    #showAcquisitions {margin-left:-10px;}
+    #showAcquisitions label {color:#084999; font-size:8pt; padding-top: 0px;}
+     
+    #financials {background-color:#FFF;}
+    #financials {display: none; color:rgb(66,66,66); overflow: hidden; font-size:8pt;}
+    #financials .header {font-weight:bold; font-size:9pt;}
+    #financials #headerDetails {font-style:italic; font-size:0.2em;}
+    #financials #headerDetails .left {float: left; width: 100px;}
+    #financials #headerDetails .right {float: left; width: 100px;  text-align: right;}
+    #financials label {float: left; font-size:8pt; font-weight: bold;}
+    #financials .value {float: left; font-size:8pt; width: 100px; text-align:right;}
+    #financials .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, 
+    .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+    border-top: 1px solid #ddd; line-height: 1.2; padding: 8px; vertical-align: top;}
+    #financials tr { padding-left:15px;}
+    #finSnapShot {font-size:10pt; font-weight: bold; text-align:left;}
+    #lastFinancials {font-size:10pt; color:#000000;}
+    #tabCategories {padding-bottom: 2px;}
+    .panel-body {padding: 3px;}
+    #dfHorizontalTabs .nav.nav-pills.df_panels {height: 25px;}
+    #dfHorizontalTabs .nav.nav-pills.df_panels li {color: #236EAE;font-size: 9pt;}
+    #dfHorizontalTabs .nav-pills.df_panels > li.active > a, 
+                      .nav-pills.df_panels > li.active > a:focus, 
+                      .nav-pills.df_panels > li.active > a:hover {background-color: #374A60; border: 1px solid #374A60; border-radius: 1px; 
+                                                                  box-shadow: 1px 2px 3px #374A60;  padding: 3px 20px 3px 2px;}
+    #searchCriteria {font-size:8pt;}
+    #refineCriteria {font-size:8pt;}
+    #ovrpd {padding-bottom:1px;}
+  
+ .tooltipIndicator + .tooltip > .tooltip-inner {margin: 0px 2px;}
+ @media (width:603px){
+    #bank_find_mobile {
+    background-image: url("../images/header_seal_360X640.png");
+    display: block;
+    padding: 200px 20px 520px;
+    }
+    .cssPageTitle {
+    font-size: 12pt;
+    font-weight: bold;
+    padding-top: 6px;
+    }
+}
+ @media (min-width:533px) and (max-width:603px) {
+
+    .bankFindHome .table > tbody > tr > td, 
+    .table > tbody > tr > th, .table > tfoot > tr > td, 
+    .table > tfoot > tr > th, .table > thead > tr > td, 
+    .table > thead > tr > th {
+        border-top: medium none;
+        line-height: 1.5em;
+        padding: 4px;
+        vertical-align: top;
+    }
+   .cssPageTitle {
+        font-size: 13pt;
+        font-weight: bold;
+        padding-top: 6px;
+    }
+
+    .mb_hist {
+        color: #084999;
+        font-size: 11pt;
+    }
+
+    .well {
+        background-color: #f2f2f2;
+        margin-top: 5px;
+        padding: 10px;
+    }
+}
+@media (width:600px){
+    #bank_find_mobile {
+    background-image: url("../images/header_seal_360X640.png");
+    display: block;
+    padding: 200px 20px 520px;
+    }
+}
+@media (width:533px) {
+    #bank_find_mobile {
+        background-image: url("../images/header_seal_360X640.png");
+        display: block;
+        padding: 170px 20px 375px;
+    }
+}
+@media (min-width:375px) and (max-width:532px) {
+#bank_find_mobile {
+        background-image: url("../images/header_seal_360X640.png");
+        display: block;
+        padding: 120px 20px 250px;
+    }
+@media (min-width:360px) and (max-width:374px) {
+    
+.bankFindHome .table > tbody > tr > td, 
+.table > tbody > tr > th, .table > tfoot > tr > td, 
+.table > tfoot > tr > th, .table > thead > tr > td, 
+.table > thead > tr > th {
+    border-top: medium none;
+    line-height: 1.5em;
+    padding: 4px;
+    vertical-align: top;
+}
+
+ #bank_find_mobile {
+        background-image: url("../images/header_seal_360X640.png");
+        display: block;
+        padding: 120px 20px 240px;
+    }
+
+
+.cssPageTitle {
+    font-size: 12pt;
+    font-weight: bold;
+    padding-top: 6px;
+}
+
+.mb_hist {
+    color: #084999;
+    font-size: 10pt;
+}
+
+.well {
+    background-color: #f2f2f2;
+    margin-top: 5px;
+    padding: 10px;
+}
+}
+@media (min-width:320px) and (max-width:359px) {
+
+.bankFindHome .table > tbody > tr > td, 
+.table > tbody > tr > th, .table > tfoot > tr > td, 
+.table > tfoot > tr > th, .table > thead > tr > td, 
+.table > thead > tr > th {
+    border-top: medium none;
+    line-height: 1.5em;
+    padding: 4px;
+    vertical-align: top;
+}
+
+ #bank_find_mobile {
+        background-image: url("../images/header_seal_360X640.png");
+        display: block;
+        padding: 100px 20px 160px;
+    }
+
+
+.cssPageTitle {
+    font-size: 12pt;
+    font-weight: bold;
+    padding-top: 6px;
+}
+
+.mb_hist {
+    color: #084999;
+    font-size: 10pt;
+}
+
+.well {
+    background-color: #f2f2f2;
+    margin-top: 5px;
+    padding: 10px;
+}
+
+label {
+    color: black;
+    font-size: 8pt;
+    padding-top: 1px;
+}
+}
+
+@media print {
+    a[href]:after {content: none !important;}
+    .hidden-print   { display: none !important; }
+     #bankFindDetails, .tmpl-name, .tmpl-status, .tmpl-certNumber, label, h4, div{padding:0px; margin:0px;}
+    .container, .container-fluid, .jumbotron, .panel-body, .panel-default, 
+    .panel-heading, .row, div, .table, .table-responsive, .table-bordered, 
+    .table-striped, th, td, .row-fluid, #resultsPageHead, #headerCertNumber, 
+    #otherBankInfo, .greyText 
+    { margin:0px; padding:0px; background-color:#FFFFFF; font-size:8pt; border:none;}
+     #resultsFilterContainer,.dataTables_length label, .dataTables_paginate, #tabCategories {display:none;}
+     #searchResultContainer, #site-container { padding: 0px; height: 100%; width: 100%; font-family: Arial; font-size: 11pt;}
+    .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, 
+    .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, 
+    .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, 
+    .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, 
+    .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {min-height: 1px; padding:0px; position: relative; margin:0px; }
+}

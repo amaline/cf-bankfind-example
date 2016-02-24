@@ -1,0 +1,251 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge 9">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>FDIC: BankFind Home</title>	
+		<!-- This APP_VERSION is set to date time during development so pages are never cached.  This will cause
+		a performance problem, though. So just before deploying  to new environment change APP_VERSION to some
+		number higher than what is on server.  This will force the browsers of all users who visit the site, to grab the new code, but only
+		once. -->
+        <script>var APP_VERSION = 36;</script>
+		
+        <link rel="stylesheet" href="css/jqueryui/ui-lightness/jquery-ui-1.9.2.custom.min.css" /> <!-- For autocomplete and datepicker -->
+        <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+        <script  src="js/jquery/jquery-1.11.3.min.js"></script>
+        <script  src="js/bootstrap.min.js"></script>
+        <script  src="js/modernizr/modernizr.min.js"></script>
+        <script  src="js/respond/respond.min.js"></script> <!-- Allows IE8 and lower to response to CSS media queries -->
+        <script  src="js/jqueryui/jquery-ui-1.9.2.custom.min.js"></script> <!-- For autocomplete and datepicker -->
+		<!-- Using scripts to generate reference to CSS and JS files with a version number so browsers don't cache them -->
+		<script>document.write('<link rel="stylesheet" type="text/css" href="css/lib.css?version=' + APP_VERSION + '"\><\/link>');</script>
+		<script>document.write('<link rel="stylesheet" type="text/css" href="css/app.css?version=' + APP_VERSION + '"\><\/link>');</script>
+        <script>document.write('<script type="text/javascript" src="js/common.js?version=' + APP_VERSION + '"\><\/script>');</script>
+        
+        <style>
+            .container {
+                padding: 0px;
+            }
+        </style>
+
+    </head>
+	<body>				
+        <div id="site-container" class="container bankFindHome">
+            <div id="site-grid-container">
+                <div id="header-container" role="banner">
+                    <!--#include virtual="/responsive/app_header_and_footer/header/header.html"-->
+                </div>
+                <article id="skipNav">
+                    <a tabindex="1" href="#bank_find_main" title="skip to content">Skip Navigation</a>
+                </article>
+                    <!-- The global nav menu -->
+                    <!--#include file="navBar.html" -->
+                    <!-- begin Bread Crumbs -->
+                    <p hidden id="hmenu">Banks</p>
+                    <p hidden id="hcurritem">BankFind</p>
+                    <p hidden id="hhead">BankFind Home</p>
+                    <!-- end Bread Crumbs -->
+                    <!-- Mobile Version -->
+
+                    <div id="bank_find_mobile" class="visible-xs">
+                        <div class="bf_selections">
+                            <div class="bf_buttons">
+                                <h4>BankFind <a href="mobile_bank_find.html"><span class="button_arrow"><img src="images/caret_right.png" alt="BankFind" /></span></a></h4>
+                            </div>
+                            <div class="bf_buttons">
+                                <h4>Details and Financials - ID <a class="detailsandFinancialsLink" href="#"><span class="button_arrow"><img src="images/caret_right.png" alt="Advanced Search" /></span></a></h4>
+                            </div>
+                            <div class="bf_buttons">
+                                <h4>Summary Statistics <a href="mobile_summary_statistics.html"><span class="button_arrow"><img src="images/caret_right.png" alt="Summary Statistics" /></span></a></h4>
+                            </div>
+                            <div class="bf_buttons">
+                                <h4>Data Availability <a href="mobile_data_availability.html"><span class="button_arrow"><img src="images/caret_right.png" alt="Data Availability" /></span> </a></h4>
+                            </div>
+                        </div>
+                    </div>
+                    <article id="content"></article>
+                <div tabindex="126" id="bank_find_main" class="hidden-xs" role="main">
+                    <!--End Mobile Version-->
+                    <div class="search_container_background">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="mobileNavWrapper">
+                                    <div id="bankFindForm" class="col-sm-7">
+                                        <div id="mobileexpandbankfind" class="cssPageTitle">
+                                            BankFind
+                                        </div>
+                                        <div class="cssPageDesc">
+                                            <span>FDIC BankFind allows you to locate FDIC-insured banking institutions</span>
+                                        </div>
+                                        <!--Bootstrap form-->
+                                        <div class="bnkformContainer">
+                                            <div class="container-fluid">
+                                                <div id="errorMessageFocus"><span id="errorMessages" title="No Errors"></span></div>
+                                                <form role="form" id="searchForm" method="get" action="./results.html" onsubmit="return validateSearchForm()">
+                                                    <div class="row">
+                                                        <div class="col-md-6 col-sm-8 col-xs-8">
+                                                            <label class="control-label" for="bankname" id="bankNm">Bank Name</label>
+                                                            <div class="form-group">
+                                                                <input tabindex="126" id="bankname" class="form-control js-bankname mrm" name="name" type="text" placeholder="Bank Name">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-8 col-xs-8">
+                                                            <a tabindex="127" role="tooltip" class="tooltipIndicator" href="#" data-toggle="tooltip" data-placement="right"
+                                                               title="FDIC Certificate number - A unique NUMBER assigned by the FDIC, used to identify institutions and for the issuance of insurance certificates.">
+                                                                <label class="control-label" for="fdicNumber">FDIC #</label>
+                                                            </a>
+                                                            <div class="form-group">
+                                                                <input tabindex="128" id="fdicNumber" type="text" name="fdic" maxlength="8" class="form-control mrm" placeholder="FDIC #" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                                            <div>
+                                                                <label class="control-label" for="Address">Address</label>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input tabindex="129" id="address" type="text" name="address" class="form-control mrm" placeholder="Address" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <fieldset>
+                                                            <div class="col-md-3 col-sm-8 col-xs-8">
+                                                                <div>
+                                                                    <label class="control-label" for="city">City</label>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input tabindex="130" id="city" type="text" name="city" class="form-control js-cityname mrm" placeholder="City" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3 col-sm-8 col-xs-8">
+                                                                <label role="listbox" class="control-label" for="state">State</label>
+                                                                <div class="form-group">
+                                                                    <select role="option" class="form-control js-stateOptions mrm"></select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3 col-sm-8 col-xs-8"></div>
+                                                            <div class="col-md-3 col-sm-8 col-xs-8">
+                                                                <div>
+                                                                    <label class="control-label" for="zipcode">ZIP Code</label>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input tabindex="132" id="zipcode" type="text" name="zip" maxlength="5" class="form-control mrm" placeholder="ZIP Code" />
+                                                                </div>
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="links"><a tabindex="133" class="detailsandFinancialsLink" href="#">Details & Financials</a></div>
+                                                    <hr />
+                                                    <div class="row search_buttons_section col-offset-xs-1 col-offset-sm-2 col-sm-8">
+                                                        <button tabindex="134" type="submit" class="col-xs-offset-3 btn btn-default btn-sm" id="findButton"> Search </button>
+                                                        <button tabindex="135" type="button" class="col-xs-offset-1 btn btn-default btn-sm" id="clearButton"> Clear </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div><!--End Bank Find Form-->
+                                    <div id="summaryStats" class="mobileNavWrapper col-sm-5 col-xs-12" role="complementary">
+                                        <div class="cssPageTitle">
+                                            Summary Statistics
+                                        </div>
+                                        <div class="cssPageDesc">
+                                            <span>
+                                                Note: Dollars in millions;
+                                                <a tabindex="136" role="tooltip" class="tooltipIndicator" href="#" data-toggle="tooltip" data-placement="bottom" title="In the Summary Statistics table, for all mergers that have occurred since the end of the last quarter, the financial information of the outgoing institution is added to the acquiring institution.">Adjusted for mergers</a>
+                                            </span>
+                                        </div>
+                                        <div id="fdicDataAndStats" class="panel panel-default js-fdicStats">
+
+                                            <div class="panel-heading bkfPanelHead"> FDIC-Insured Institutions</div>
+                                            <div id="institutionData" class="panel-body fdicdata">
+                                                <table class="table table-responsive table-striped">
+                                                    <tr>
+                                                        <td>Number as of</td>
+                                                        <td class="text-right"><span class="tmpl-currDemDt"></span></td>
+                                                        <td class="text-right"><span class="tmpl-certCount"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Assets as of</td>
+                                                        <td class="text-right"><span class="tmpl-currFinDt"></span></td>
+                                                        <td class="text-right"><span class="tmpl-totFdicInsAssets"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Deposits as of</td>
+                                                        <td class="text-right"><span class="tmpl-currFinDt"></span></td>
+                                                        <td class="text-right"><span class="tmpl-totFDICInsDep"></span></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div id="panel-footer" class="panel-footer">
+                                                <!-- /.modal -->
+                                                <a tabindex="137" href="#" class="links hidden-xs" id="ksModalLink" data-toggle="modal" data-target="#ksModal"> View Key Statistics</a>
+                                            </div>
+                                        </div>
+                                    </div><!--End Summary Statitics-->
+                                    <div id="dataAvailability" class="mobileNavWrapper col-sm-5 col-xs-12" role="complementary">
+                                        <div class="container-fluid da-container">
+                                            <div class="cssPageTitle">
+                                                Data Availibility
+                                            </div>
+                                            <div class="cssPageDesc">
+                                                <span>Note: Quarterly updates made at the end of February, May, August, and November.  Annual data through 1992 and quarterly data through 2002.</span>
+                                            </div>
+                                            <div class="well well-sm" style="background-color:#fff;">
+                                                <table class="table table-responsive table-striped" style="padding-bottom:20px;">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th style="text-align:right;" colspan="2">Most Current</th>
+                                                            <th style="text-align:right;" colspan="2">Updated</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Demographics</td>
+                                                            <td class="text-right"><span class="tmpl-currDemDt"></span></td>
+                                                            <td class="text-right">Weekly</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Financial</td>
+                                                            <td class="text-right"><span class="tmpl-currFinDt"></span></td>
+                                                            <td class="text-right">Quarterly</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div><!--End Data Avalibility-->
+                                </div><!--End Mobilewrapper-->
+                            </div> <!--End panel body-->
+                        </div><!--End panel-default-->
+                    </div>
+                </div>
+                    <div tabindex="999">
+                        <!--#include virtual="/responsive/app_header_and_footer/footer/footer.html"-->
+                    </div><!--End panel footer-->
+                </div>
+      </div><!--End Site Container-->
+     
+        <!-- Bootstrap Modal to display Key Statistics page -->
+        <div id="ksModal" class="modal hidden-xs" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-body">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> Close [X] </button>
+                </div>
+
+                <!-- display the content of the remote page in iframe -->
+                <iframe title="Key Statistics Modal" id="ksIframeID" class="iframeWrapper"> </iframe>
+            </div>
+        </div>
+										
+        <!-- Java Script For autocomplete and datepicker -->
+       
+        <script>document.write('<script type="text/javascript" src="js/search.js?version=' + APP_VERSION + '"\><\/script>');</script>
+        <script>document.write('<script type="text/javascript" src="js/index.js?version=' + APP_VERSION + '"\><\/script>');</script>
+        <script>document.write('<script type="text/javascript" src="js/navBar.js?version=' + APP_VERSION + '"\><\/script>');</script>
+        <script>document.write('<script type="text/javascript" src="js/navBar.js?version=' + APP_VERSION + '"\><\/script>');</script>
+        <script>document.write('<script type="text/javascript" src="js/jquery.placeholder.js?version=' + APP_VERSION + '"\><\/script>');</script>
+        <script>document.write('<script type="text/javascript" src="js/add_placeholders.js?version=' + APP_VERSION + '"\><\/script>');</script>
+ 
+	</body>
+</html>

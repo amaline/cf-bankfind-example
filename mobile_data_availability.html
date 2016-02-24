@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge 9">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FDIC: BankFind Home</title>
+    <!-- This APP_VERSION is set to date time during development so pages are never cached.  This will cause
+    a performance problem, though. So just before deploying  to new environment change APP_VERSION to some
+    number higher than what is on server.  This will force the browsers of all users who visit the site, to grab the new code, but only
+    once. -->
+    <script>var APP_VERSION = 36;</script>
+
+    <link rel="stylesheet" href="css/jqueryui/ui-lightness/jquery-ui-1.9.2.custom.min.css" /> <!-- For autocomplete and datepicker -->
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+    <script src="js/jquery/jquery-1.11.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/modernizr/modernizr.min.js"></script>
+    <script src="js/respond/respond.min.js"></script> <!-- Allows IE8 and lower to response to CSS media queries -->
+    <script src="js/jqueryui/jquery-ui-1.9.2.custom.min.js"></script> <!-- For autocomplete and datepicker -->
+    <!-- Using scripts to generate reference to CSS and JS files with a version number so browsers don't cache them -->
+    <script>document.write('<link rel="stylesheet" type="text/css" href="css/lib.css?version=' + APP_VERSION + '"\><\/link>');</script>
+    <script>document.write('<link rel="stylesheet" type="text/css" href="css/app.css?version=' + APP_VERSION + '"\><\/link>');</script>
+    <script>document.write('<script type="text/javascript" src="js/common.js?version=' + APP_VERSION + '"\><\/script>');</script>
+
+    <style>
+        .container {
+            padding: 0px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="site-container" class="bankFindHome">
+        <div id="site-grid-container">
+            <div>
+                <!--#include virtual="/responsive/app_header_and_footer/header/header.html"-->
+            </div>
+            <!-- The global nav menu -->
+            <!--#include file="navBar.html" -->
+
+            <div class="mobile_search_container_background">
+                <!--Mobile Heading-->
+                <div class="category_banner row-fluid">
+                    <div class="col-xs-4">
+                        <a class="mb_hist" href="index.html"> < Back</a>
+                    </div>
+                    <div id="mobileexpandbankfind" class="cssPageTitle col-offset-xs-4">
+                        Data Availibility
+                    </div>
+                </div>
+                <div id="dataAvailability" class="mobileNavWrapper">
+                    <div class="container-fluid da-container">
+                        <div class="cssPageDesc">
+                            <span>Note: Quarterly updates made at the end of February, May, August, and November.  Annual data through 1992 and quarterly data through 2002.</span>
+                        </div>
+                        <div class="well js-fdicStats">
+                            <table class="table table-responsive table-striped">
+                                <tbody>
+                                    <tr>
+                                        <th colspan="2" style="text-align:right;">Most Current</th>
+                                        <th colspan="2" style="text-align:right;">Updated</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Demographics</td>
+                                        <td class="text-right"><span class="tmpl-currDemDt"></span></td>
+                                        <td class="text-right">Weekly</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Financial</td>
+                                        <td class="text-right"><span class="tmpl-currFinDt"></span></td>
+                                        <td class="text-right">Quarterly</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div><!--End Data Avalibility-->
+            </div>
+            <div>
+                <!--#include virtual="/responsive/app_header_and_footer/footer/footer.html"-->
+            </div><!--End panel footer-->
+        </div>
+    </div><!--End Site Container-->
+    <!-- For autocomplete and datepicker -->
+    <script src="js/search.js"></script>
+    <script src="js/index.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge 9">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>FDIC: BankFind Search Results</title>
+		
+		<!-- This APP_VERSION is set to date time during development so pages are never cached.  This will cause
+		a performance problem, though. So just before deploying  to new environment change APP_VERSION to some
+		number higher than what is on server.  This will force the browsers of all users who visit the site, to grab the new code, but only
+		once. -->
+		<script>var APP_VERSION = 62;</script>
+		<!-- Using scripts to generate reference to CSS and JS files with a version number so browsers don't cache them -->
+        <script src="js/jquery/jquery-1.11.3.min.js"></script>
+       
+		<script src="js/modernizr/modernizr.min.js"></script>
+		<script src="js/respond/respond.min.js"></script>	<!-- Allows IE8 and lower to response to CSS media queries -->	
+        <script src="js/jqueryui/jquery-ui-1.9.2.custom.min.js"></script> <!-- For autocomplete and datepicker -->
+        <!--Bootstrap-->
+        <script src="js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">  <!-- Bootstrap -->
+        <!-- For autocomplete, datepicker and data tables -->
+        <link rel="stylesheet" href="css/jqueryui/ui-lightness/jquery-ui-1.9.2.custom.min.css" /> <!-- For autocomplete and datepicker -->
+        <link rel="stylesheet" href="css/dataTables/jquery.dataTables.min.css">
+        
+		<script>document.write('<link rel="stylesheet" type="text/css" href="css/lib.css?version=' + APP_VERSION + '"\><\/link>');</script>
+		<script>document.write('<link rel="stylesheet" type="text/css" href="css/app.css?version=' + APP_VERSION + '"\><\/link>');</script>
+        <script>document.write('<link rel="stylesheet" type="text/css" href="css/faceted_filter.css?version=' + APP_VERSION + '"\><\/link>');</script>
+        <script>document.write('<script type="text/javascript" src="js/common.js?version=' + APP_VERSION + '"\><\/script>');</script>
+        <style>
+            .container {
+                padding: 0px;
+            }
+          
+        </style>
+
+    </head>
+	<body>
+        <div class="container" id="site-container">
+			<div id="site-grid-container">
+                <div id="header-container" role="banner">
+                    <!--#include virtual="/responsive/app_header_and_footer/header/header.html"-->
+                </div>
+                <div id="skipNav">
+                    <a tabindex="1" href="#main_content" title="skip to content">Skip Navigation</a>
+                </div>
+                <!-- The global nav menu -->
+                <!--#include file="navBar.html" -->
+                <!-- begin Bread Crumbs -->
+                <p hidden id="hmenu">Banks</p>
+                <p hidden id="hcurritem">BankFind</p>
+                <p hidden id="hhead">BankFind Search Results</p>
+                <!-- end Bread Crumbs -->
+                <article id="content"></article>
+                <style>
+                    .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7,
+                    .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5,
+                    .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3,
+                    .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12,
+                    .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+                        min-height: 1px;
+                        padding-left: 15px;
+                        padding-right: 8px;
+                        position: relative;
+               
+                    }
+                </style>
+                <div>
+                    <!--#include file="results_main.htm" -->
+                </div><!--end if main container-->
+		   </div>
+		</div>
+
+        <script src="js/dataTables/jquery.dataTables.min.js"></script>
+        <!--Pagination 1.10.9-->
+        <script type="text/javascript" src="js/dataTables/select.js"></script>
+        <script>document.write('<script type="text/javascript" src="js/search.js?version=' + APP_VERSION + '"\><\/script>');</script>
+        <script>document.write('<script type="text/javascript" src="js/results.js?version=' + APP_VERSION + '"\><\/script>');</script>
+        <script>document.write('<script type="text/javascript" src="js/faceted_filter.js?version=' + APP_VERSION + '"\><\/script>');</script>
+        <script>document.write('<script type="text/javascript" src="js/navBar.js?version=' + APP_VERSION + '"\><\/script>');</script>
+   </body>
+</html>

@@ -1,0 +1,74 @@
+﻿<div id="filter_main_content">
+    <div id="collapsed_container">
+
+    </div>
+
+    <div id="filter_container">
+        <div class="filter_header">
+            <div class="collapse_icon">
+                <img tabindex="137" id="open_close_img" src="images/FacetClose-Normal.png" alt="Collapse Panel" onmouseover="hoverIcon()" onmouseout="defaultIcon()" onclick="OpenClosePanel()" />
+            </div>
+            <ul class="filter_tabs">
+                 <li id="refine_tab_title" class="filter_heading"><a tabindex="138" href="javascript:void(0)" onclick="showRefineTab()">Refine</a></li>
+            </ul>
+
+        </div>
+        <!-- Tab panes -->
+        <div class="tab-content">
+           
+            <div class="filter_content displayed" id="refine_content_tab2">
+
+            </div>
+            <div class="tab-content">
+                <div class="filter_content displayed" id="refine_content_tab">
+
+                    <form class="filter_form">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <a tabindex="139" href="javascript:resetForm()" class="reset_link" title="Reset to initial search result">Reset</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-8">
+                                <div id="activeBankFilter" class="subsection pls relative">
+                                    <div>
+                                        <a tabindex="140" class="js-tooltip tooltipIndicator popOverIndicator" data-placement="right" data-toggle="popover" data-trigger="click" data-content='An institution is either Active or Inactive during a quarterly report period active – as of the date, the institution is still conducting business as an fdic insured institution
+                                            <br />
+                                            <a tabindex="141" target="_blank" style="color: #ffffff; text-decoration:underline;" href="https://research.fdic.gov/bankfind/glossary.html#status">More Info...</a>'>
+                                            <label title="Click for details about FDIC Status" for="Bank Charter Class">Institution Status</label>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <input tabindex="142" id="activeBank" type="checkbox" name="status" value="active" />
+                                        <div class="label plm"><label for="activeBank" class="smallText active-status">Active Only</label></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-8">
+                                <label for="state">State (Locations)</label>
+                                <div class="form-group">
+                                    <select class="form-control js-stateOptions"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-8">
+                                <label for="city">City (Locations)</label>
+                                <div class="form-group">
+                                    <input tabindex="144" id="city" type="text" name="city" class="form-control js-cityname mrm" placeholder="City" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <!-- End Refine Tab -->
+            </div>
+            <!-- End Refine Tab -->
+        </div> <!-- End tab-content -->
+
+    </div> <!-- End Filter Container -->
+ 
+</div> <!-- End main Container -->

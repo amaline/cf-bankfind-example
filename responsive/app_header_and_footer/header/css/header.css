@@ -1,0 +1,151 @@
+@charset "utf-8";
+/* CSS Document */
+
+div.clear 
+{
+	clear:both;
+}
+
+a.responsive_header-skip_header,
+a#after_header
+{
+	position:absolute;
+	display:block;
+	width:1px;
+	height:1px;
+	overflow:hidden;
+}
+
+div#responsive_header
+{
+	clear: both;
+	margin: 0 auto;
+	width: 990px;
+	background-color: #124c8f;
+	background-image: url('../graphics/header_seal.png');
+	background-position: 80% 0%;
+	background-repeat: no-repeat;
+}
+
+div#responsive_header a:hover { outline:none; }
+
+a#responsive_header-fdic_logo
+{
+	display:block;
+	float:left;
+	background-image: url('../graphics/header-fdic_logo.png');
+	width:135px;
+	height:51px;
+	margin: 12px 12px 10px 12px;
+	background-repeat:no-repeat;
+	overflow:hidden;
+	color:transparent;
+	font-size:0;
+	line-height:0;
+	text-decoration:none;
+}
+
+div#responsive_header h1
+{
+	clear:none;
+	font-size: 18px;
+	font-weight: bold;
+	margin: 0;
+	padding: 6px 0 0 0;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #fff;
+	border:none;
+}
+
+div#responsive_header h2
+{
+	clear:none;
+	font-size: 14px;
+	font-weight: normal;
+	margin: 0;
+	padding: 0;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #fff;
+}
+
+div#responsive_header div#responsive_header-right_side
+{
+	float:right;
+	text-align:right;
+	width: 180px;
+	margin-bottom:8px;
+}
+
+div#responsive_header div#responsive_header-right_side ul#responsive_header-links
+{
+	display: block;
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	list-style-image: none;
+}
+
+div#responsive_header div#responsive_header-right_side ul#responsive_header-links li
+{
+	float:right;
+	display:block;
+	width:24px;
+	height:24px;
+	margin:5px 7px 0 0;
+	padding:0;
+}
+div#responsive_header div#responsive_header-right_side ul#responsive_header-links li#responsive_header-itunes { background-image: url('../graphics/itunes.png'); }
+
+div#responsive_header div#responsive_header-right_side ul#responsive_header-links li#responsive_header-twitter { background-image: url('../graphics/twitter.png'); }
+
+div#responsive_header div#responsive_header-right_side ul#responsive_header-links li#responsive_header-facebook { background-image: url('../graphics/facebook.png'); }
+
+div#responsive_header div#responsive_header-right_side ul#responsive_header-links li#responsive_header-fdicchannel { background-image: url('../graphics/youtube.png'); }
+
+div#responsive_header div#responsive_header-right_side ul#responsive_header-links li#responsive_header-rss { background-image: url('../graphics/rss.png'); }
+
+div#responsive_header div#responsive_header-right_side ul#responsive_header-links li#responsive_header-subscribe { background-image: url('../graphics/subscribe.png'); }
+
+div#responsive_header div#responsive_header-right_side ul#responsive_header-links a
+{
+	display:block;
+	width:24px;
+	height:24px;
+	overflow:hidden;
+	color:transparent;
+	font-size:0;
+	line-height:0;
+	text-decoration:none;
+}
+
+
+@media (max-width:1200px)
+{
+	div#responsive_header 
+	{ 
+		width:auto; 
+		max-width:990px;
+	}
+}
+
+@media (max-width:800px)
+{
+	div#responsive_header h2 { display:none; }
+}
+
+@media (max-width:600px)
+{
+	div#responsive_header h1 { display:none; }
+}
+
+@media (max-width:500px)
+{
+	a#responsive_header-fdic_logo
+	{
+		height:35px;
+		width:92px;
+		background-image: url('../graphics/header-fdic_logo-sml.png');
+		margin:4px;
+	}
+}
+

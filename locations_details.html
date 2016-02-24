@@ -1,0 +1,43 @@
+<div id="locations">
+    <div class="row">
+       <div id="main_content">
+            <div id="searchResultContainer" class="col-sm-12 col-xs-12">
+                <div id="searchCriteria"  class="row hidden-xs">
+                    <span id="js-searchCriteria"></span>
+                </div>
+                <div class="showLocations">
+                    <div id="locationNavBar" class="mbm pls hidden-print">
+                        <div id="allResultsLink" class="linkOn links js-locationLink"><a tabindex="142" id="showAllLocations" href="#">All Locations</a></div>
+                        <div>|</div>
+                        <div id="searchResultsLink" class="linkOff links js-locationLink"><a tabindex="143" id="showMatchingLocations" href="#">Specific Locations</a></div>
+                        <div>|</div>
+                        <div id="byStateLink" class="linkOn links js-locationLink"><a tabindex="144" id="showStates" href="#">View By State</a></div>
+                        <div id="filteredByStateHeader" class="js-locationLink">Current Filter: <span class="tmpl-currentFilter"></span></div>
+                        <div id="numOffices">Number of Offices: <span class="tmpl-domOffCnt"></span> Domestic, <span class="tmpl-othAreaOffCnt"></span> Territories, <span class="tmpl-forOffCnt"></span> Foreign</div>
+                    </div>
+                    <div id="results" class="row results">
+                        <table id="locationsTable" class="table table-responsive table-striped table-bordered resultTableContainer js-locationdatatable" summary="Location Details">
+                            <thead>
+                                <tr>
+                                    <th id="locationUninum" class="essential"><label for="UNINUM">UNINUM</label></th>
+                                    <th id="locationNumber" class="optional"><label for="Number">Number</label></th>
+                                    <th id="locationName" class="essential"><label for="Name">Name</label></th>
+                                    <th id="locationAddress"><label for="Address">Address</label></th>
+                                    <th id="locationCounty" class="optional"><label for="County">County</label></th>
+                                    <th id="locationCity" class="optional"><label for="City">City</label></th>
+                                    <th id="locationState" class="essential"><label for="State">State</label></th>
+                                    <th id="locationZip" class="optional"><label for="Zip">Zip</label></th>
+                                    <th id="locationServiceTypeCode"><label for="Service Type">Service Type</label></th>
+                                    <th id="locationEstablishedDate"><label for="Established Date">Established Date</label></th>
+                                    <th id="locationAcquiredDate"><label for="Acquired Date">Acquired Date</label></th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div id="byState"></div>
+                </div>
+                <div class="showNoLocations">Location information is not available for inactive or renamed banks</div>
+            </div>
+        </div>
+    </div>
+</div>

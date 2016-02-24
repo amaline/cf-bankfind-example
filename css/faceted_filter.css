@@ -1,0 +1,184 @@
+﻿/*#filter_main_content {
+    margin: 2px;
+    padding: 0px 10px 10px 10px;
+}*/
+
+#filter_container {
+    font-family: Arial, sans-serif;
+    border: 1px solid #D7D7D7;
+    box-shadow: #C9C9C9 2px 2px;
+    padding:2px;
+    margin-left:3px;
+    margin-bottom:5px;
+}
+
+#filter_container .tab-content .filter_form .form-control {
+    background-color: #fff;
+}
+
+.filter_header {
+    background-color: #fff;
+    margin-bottom: -10px;
+    border-bottom: 1px solid #D7D7D7;
+    padding: 10px 10px 0 10px;
+   
+ }
+
+.filter_tabs {
+    height: 38px;
+    background: #fff;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+}
+
+.reset_link {
+    float: right;
+    margin-top: -20px;
+ }
+
+.multiselect.dropdown-toggle.btn.btn-default {
+    width: 280px;
+    text-align: left;
+}
+
+.multiselect-container.dropdown-menu li label.checkbox {
+    width: 280px;
+}
+
+.multiselect-selected-text {
+    float:left;
+}
+
+
+#collapsed_container {
+    padding-left: 15px;
+    padding-bottom: 20px;
+    width: 30px;
+    height: 100%;
+    background-color: #fff;
+    border: 1px solid #fff;
+    display: none;
+}
+
+.filter_tabs .filter_heading {
+    margin-left: 10px;
+    margin-right: 10px;
+    display: inline;
+    padding-bottom: 5px;
+}
+
+.filter_tabs .filter_heading a {
+    color: #000000;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 7px 10px;
+}
+
+.filter_form .sub_label {
+    font-size: 12px;
+}
+
+.collapse_icon {
+    width: 28px;
+    float: right;
+    padding-right: 10px;
+    padding-left:15px;
+}
+
+.collapse_icon img:hover {
+    cursor: pointer;
+}
+
+.filter_heading.displayed {
+    
+    border-bottom: 8px solid #374A60;
+}
+
+.filter_heading.displayed a {
+    color:  #374A60;
+}
+
+
+.filter_form {
+    padding: 25px 8px 25px 8px;
+    background: #f2f2f2;
+}
+
+.filter_form .row {
+	margin-top: 2px;
+}
+
+.filter_form label {
+    font-size: 14px;
+    color:#000000;
+}
+
+.filter_form .dates {
+    background: url(../images/Calendar-Normal.png) no-repeat scroll 7px 7px;
+    padding-left: 35px;
+}
+
+.filter_form .dates:hover {
+    background: url(../images/Calendar-Hover.png) no-repeat scroll 7px 7px;
+}
+
+.filter_form  input::-webkit-input-placeholder {
+	color: #A1A1A1;
+	font-size: 14px;
+}
+
+.filter_form  input::-moz-placeholder {
+	color: #A1A1A1;
+	font-size: 14px;
+ }
+ 
+.filter_form input:-ms-input-placeholder {
+	color: #A1A1A1;
+	font-size: 14px;
+}
+
+@media screen and (max-width: 801px) {
+    .filter_form select {
+        background: #ffffff none repeat scroll 0 0;
+        border: 1px solid #ccc;
+        border-radius: 2px;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+        color: #000000;
+        font-size: 7pt;
+        height: 28px;
+     }
+}
+@media screen and (min-width: 802px) {
+    .filter_form select {
+        font-size: 9pt;
+        background: none repeat scroll 0 0 #FFFFFF;
+        height: 28px;
+        padding-left: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+        color: #000000;
+    }
+}
+
+ul.filter_assets_value {
+    width: 345px;
+	margin-left: -40px;
+}
+
+ul.filter_assets_value li {
+	display: inline;
+}
+
+#filter_inactive_date {
+    display: none;
+}
+
+#total_deposits_content,
+#net_income_assets_qtr,
+#net_income_assets_ytd {
+    display: none;
+}
+

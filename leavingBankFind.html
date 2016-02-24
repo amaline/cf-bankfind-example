@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<!-- This APP_VERSION is set to date time during development so pages are never cached.  This will cause
+		a performance problem, though. So just before deploying  to new environment change APP_VERSION to some
+		number higher than what is on server.  This will force the browsers of all users who visit the site, to grab the new code, but only
+		once. -->
+		<script>var APP_VERSION = 26;</script>
+	
+	    <link rel="stylesheet" href="css/jqueryui/ui-lightness/jquery-ui-1.9.2.custom.min.css" /> <!-- For autocomplete and datepicker -->
+        <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+        <script src="js/jquery/jquery-1.11.3.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/modernizr/modernizr.min.js"></script>
+        <script src="js/respond/respond.min.js"></script> <!-- Allows IE8 and lower to response to CSS media queries -->
+        <script src="js/jqueryui/jquery-ui-1.9.2.custom.min.js"></script> <!-- For autocomplete and datepicker -->
+        <!-- Using scripts to generate reference to CSS and JS files with a version number so browsers don't cache them -->
+        <script>document.write('<link rel="stylesheet" type="text/css" href="css/lib.css?version=' + APP_VERSION + '"\><\/link>');</script>
+        <script>document.write('<link rel="stylesheet" type="text/css" href="css/app.css?version=' + APP_VERSION + '"\><\/link>');</script>
+		<script>document.write('<script type="text/javascript" src="js/common.js?version=' + APP_VERSION + '"\><\/script>');</script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('.js-website').attr('href', function() {
+					return getURLParameter('website');
+				});	
+			});
+		</script>
+		
+		<title>FDIC: Leaving BankFind</title>	
+	</head>
+
+	<body>
+	
+	
+	<div id ="site-container">
+		<div id="site-grid-container">
+            <a id="skipNav" tabindex="0" href="#maincontent" title="skip to content">Skip Navigation</a>
+			<div id="header-container">
+				<!--#include virtual="/responsive/app_header_and_footer/header/header.html"-->
+			</div>
+            <!-- The global nav menu -->
+            <!--#include file="navBar.html" -->
+            <!-- begin Bread Crumbs -->
+            <p hidden id="hmenu">Banks</p>
+            <p hidden id="hcurritem">BankFind</p>
+            <p hidden id="hhead">Leaving BankFind Confirmation</p>
+            <!-- end Bread Crumbs -->
+			
+            <div id="warp" style="text-align:justify; margin-left:5px;">
+                <!--<div class="mainNavBar cs-fontb pts plm">
+            <div class="prl cs-fll"><a tabindex="2" href="index.html">BankFind Home</a></div>
+            <div class="cs-flr pll"><a tabindex="4" class="js-addLegacyAppPrefix" href="/idasp/DIRSInfoRequest.asp">Questions &amp; Suggestions</a></div>
+            <div class="cs-flr"><a tabindex="3" href="./glossary.html">Glossary</a></div>
+        </div>-->
+                <a id="maincontent" tabindex="5"></a>
+                <h3 class="pas cs-txtc">You are about to leave the FDIC's Internet site.</h3>
+                <h3 class="pvs">Notice: </h3>
+                <p>
+                    The Primary Internet Web Addresses listed have been reported to the FDIC by each institution. The hyperlinks to
+                    institution Internet sites are provided solely as a convenience to users of the FDIC Internet site. The FDIC has made
+                    a limited effort to determine that these links function properly. However, linked sites are not under the control
+                    of FDIC, and FDIC is not responsible for the contents of any linked site, or any link contained in a linked site. Even
+                    if you access an institution's site by means of the link provided by FDIC, you are responsible for confirming the
+                    identity and authenticity of any institution you visit and transact business with online. The inclusion of a link does
+                    not imply or constitute an endorsement by FDIC of the institution, its ownership or management, the products or services
+                    it offers, or any advertisers or sponsors appearing on the institution's web site.
+                </p>
+                <h5 class="ptl cs-txtc"><a class="js-website" href="">Continue on to the external website</a></h5>
+            </div>
+	
+			<!--#include virtual="/responsive/app_header_and_footer/footer/footer.html" -->
+		</div>
+	</div>
+	</body>
+	
+</html>

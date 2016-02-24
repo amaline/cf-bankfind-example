@@ -1,0 +1,197 @@
+                        <div class="jumbotron overview_details" role="article">
+                            <div class="container detailHeader plg pts js-bankdetails">
+                                <a id="maincontent" tabindex="133"></a>
+                                <div class="activeBank cs-hide">
+                                    <div class="greyText"><span class="tmpl-name"></span> is an active bank</div>
+                                </div>
+                                <div class="row" style="padding-left:5px;">
+                                    <div class="row-fluid" style="padding:4px;">
+                                        <div id="summary" class="pbm">
+                                            <div class='renamedBank cs-hide'>
+                                                <span class="cs-fontb tmpl-name"></span> has changed its legal name and is currently doing business as
+                                                <span class="tmpl-legalName js-toCurrentBankDetailLinkByCert"></span>
+                                            </div>
+                                            <div class='uninsuredBank cs-hide'>
+               
+                                                <span class="cs-fontb tmpl-name"></span> is no longer doing business <span class="reason">as an FDIC-insured institution</span>
+                                            </div>
+                                            <div class='changeCert cs-hide'>
+                                                <span class="cs-fontb tmpl-name"></span> had a legal change made to the FDIC Certificate #. See successor institution,
+                                                <span class="tmpl-acqName js-toBankDetailLinkByAcqCertWithFdicNum links" style="font-size:11pt;"></span>
+                                            </div>
+                                            <div class='mergedBankwga cs-hide'>
+                                                <span class="cs-fontb tmpl-name"></span><span>
+                                                    is no longer doing business under that name because <span class="reason">it has been acquired with government
+                                                    assistance</span>. See the successor institution,
+                                                </span>&nbsp;<span class="js-toBankDetailLinkByUltCert">&nbsp;<span class="tmpl-ultCertName"></span> (FDIC #: <span class="tmpl-ultCertNum"></span>)</span>
+
+                                            </div>
+                                            <div class='mergedBankwOga cs-hide'>
+                                               
+                                                <span class="cs-fontb tmpl-name"></span><span>
+                                                    is no longer doing business under that name because it has been <span class="reason">merged or acquired without government
+                                                    assistance</span>. See the successor institution,
+                                                </span>
+                                                <span class="js-toBankDetailLinkByUltCert">&nbsp;<span class="tmpl-ultCertName"></span> (FDIC #: <span class="tmpl-ultCertNum"></span>)</span>
+                                            </div>
+                                            <div class='closedBankwga cs-hide'>
+                                               
+                                                <span class="cs-fontb tmpl-name"></span> <span class="reason">was closed with government assistance</span>, and is no longer in operation
+                                            </div>
+                                            <div class='closedBankwOga cs-hide'>
+                                            
+                                                <span class="cs-fontb tmpl-name"></span> <span class="reason">was closed without government assistance</span>, and is no longer in operation
+                                            </div>
+                                        </div>
+                                        <div id="detailedInfo" class="cs-fll">
+                                            <div id="bankHoldingCompany" class="unit pbs relative" style="display: none;">
+                                                <label><a id="ttBankHoldingCompany" title="Click for details about Bank Holding Company" href="#" role="tooltip" class="js-tooltip tooltipIndicator">Bank Holding Company:</a></label>
+
+                                                <span class="value tmpl-holdingCompany"></span>
+                                            </div>
+                                        </div>
+                             
+                                    </div> <!-- end of Inactive section-->
+                                    <div class="col-xs-12 col-sm-4 col-border">
+                                        <section>
+                                            <div id="certNumber" class="row ovrpd">
+                                                <div class="col-xs-6 col-sm-6">
+                                                    <div>
+                                                        <label for="FDIC Certificate Number">FDIC Certificate#:</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-6">
+                                                    <div class="unit pbs">
+                                                        <span class="value tmpl-certNumber"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="address" class="row ovrpd">
+                                                <div class="col-xs-6 col-sm-6">
+                                                    <div>
+                                                        <label for="Institution Head Quarters">Headquarters:</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-6">
+                                                    <div class="unit pbs">
+                                                        <span class="value">
+                                                            <span class="tmpl-address"></span><br />
+                                                            <span class="tmpl-city"></span>, <span class="tmpl-state"></span> <span class="tmpl-zip"></span><br />
+                                                            <span class="tmpl-county"></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row activeBank ovrpd">
+                                                <div class="col-xs-6 col-sm-6">
+                                                    <div>
+                                                        <label for="Institution Locations">Locations:</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-6">
+                                                    <div>
+                                                        <strong><span class="tmpl-officeCount"></span></strong> domestic in
+                                                        <strong><span class="tmpl-stateOffCnt"></span></strong> states,<br />
+                                                        <strong><span class="tmpl-othAreaOffCnt"></span></strong> in territories, and
+                                                        <strong><span id="foreignOfficeCount" class="tmpl-forOffCnt"></span></strong> in foreign locations
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 col-border">
+                                        <section>
+                                            <div id="establishedDate" class="row ovrpd">
+                                                <div class="col-xs-6 col-sm-6">
+                                                    <div>
+                                                        <label for="Institution established date">Established:</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-6">
+                                                    <div class="unit pbs">
+                                                        <span class="value tmpl-establishedDate"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="insuredSince" class="row ovrpd">
+                                                <div class="col-xs-6 col-sm-6">
+                                                    <div>
+                                                        <label for=" Institution Insured date">Insured:</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-6">
+                                                    <div class="unit pbs">
+                                                        <span class="value tmpl-insuredDate"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="charterClass" class="row ovrpd">
+                                                <div class="col-xs-6 col-sm-6">
+                                                    <div>
+                                                        <a tabindex="134" role="tooltip" class="js-tooltip tooltipIndicator popOverIndicator" href="#" data-placement="bottom" data-toggle="popover" data-trigger="click" data-content='A classification code assigned by the FDIC based on the institution charter type (commercial bank or savings institution), charter agent (state or federal), federal reserve membership status
+                                                            <br />
+                                                            <a tabindex="135" target="_blank" style="color: #ffffff; text-decoration:underline;" href="https://research.fdic.gov/bankfind/glossary.html#bkclass">More Info...</a>'>
+                                                            <label title="Click for details about Bank Charter Class" for="Bank Charter Class">Bank Charter Class:</label>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-6">
+                                                    <div class="unit pbs relative">
+
+                                                        <span class="value tmpl-bankClassDesc"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="regulatedBy" class="row ovrpd">
+                                                <div class="col-xs-6 col-sm-6">
+                                                    <div>
+                                                        <a tabindex="136" role="tooltip" class="js-tooltip tooltipIndicator popOverIndicator" href="#" data-placement="bottom" data-toggle="popover" data-trigger="click" data-content='Currently there are three federal regulators of banks, and savings and loan institutions.
+                                                            <br />
+                                                            <a tabindex="137" target="_blank" style="color: #ffffff; text-decoration:underline;" href="https://research.fdic.gov/bankfind/glossary.html#regagnt">More Info...</a>'>
+                                                            <label title="Click for details about Regulated By" for="Institution Regulated By">Regulated By:</label>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-6">
+                                                    <div class="unit pbs relative">
+
+                                                        <span class="value tmpl-FACodeText"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                       </section>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4">
+                                        <section>
+                                            <div id="website" class="unit pbs cs-clr ovrpd">
+                                                <div><label>Corporate Website:</label></div>
+                                                <div>
+                                                    <span tabindex="138" class="value tmpl-webSite js-toSiteLink links"></span>
+                                                </div>
+                                            </div>
+                                            <div id="regulatorInfo" class="unit pbs cs-clr relative ovrpd">
+                                                <div>
+                                                    <a tabindex="139" role="tooltip" data-toggle="tooltip" data-placement="bottom" class="js-tooltip tooltipIndicator" href="#" id="ttConsumerAssistance" title="The link is to the consumer help section of the bank's primary Federal regulator, which is the agency mainly responsible for solving a problem or concern">
+                                                        <label for="Consumer Assistance">Consumer Assistance:</label>
+                                                    </a>
+                                                </div>
+                                                <span class="value tmpl-FACode js-toRegulatorSiteLink"></span>
+                                            </div>
+                                            <div id="contactSingle" class="pts cs-clr">
+                                                <label>Contact the FDIC about:</label>
+                                                <div>
+                                                    <span tabindex="140" class="tmpl-name js-toRequestBankDetailLinkByCert links"></span>
+                                                </div>
+                                            </div>
+                                            <div id="contactDouble" class="ptm cs-clr ovrpd">
+                                                <div><label>Contact the FDIC about:</label></div>
+                                                <div>
+                                                    <span tabindex="141" class="tmpl-name js-toRequestBankDetailLinkByCert links"></span> or
+                                                    <span class="js-toRequestBankDetailLinkByAcqCertOrLegalName"></span>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>

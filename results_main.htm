@@ -1,0 +1,75 @@
+<div id="bankFindResults" class="panel panel-default" role="main">
+    <div class="row resultsPageHead">
+        <span class="col-md-9 col-xs-12">
+            <span class="cssPageTitle">BankFind Search Results</span>
+        </span>
+        <span class="col-md-3 hidden-xs hidden-sm">
+            <a tabindex="126" id="exportResultsButton">
+                <img src="images/download-Normal.png" alt="download" class="cssIconWrapper printExportResultsButton pull-right">
+            </a>
+            <a  id="printResultsButton" class="cssIconWrapper printExportResultsButton pull-right" onclick="window.print()">
+                <img tabindex="127" src="images/print-Normal.png" alt="print" class="cssIcon">
+            </a>
+        </span>
+        <h4 class="col-sm-9 col-xs-9 col-md-9 js-demDate">Data as of <span class="tmpl-currDemDt"></span></h4>
+    </div>
+
+    <div class="panel-body" style="padding:0px;">
+        <div id="resultsFilter" class="section phm pts prs visible-xs" style="display:none;">
+            <div id="searchTextFilter" class="narrowSubsection ptm pls pbm">
+                <div class="label"><label for="searchFilter">Search Within</label></div>
+                <input id="searchFilter" class="inputNarrow" type="text" />
+                <button  id="searchWithinButton" class="searchWithinButton cs-button-grey cs-cornera cs-noprint" type="button">Update Results</button>
+            </div>
+
+            <div id="activeBankFilter" class="subsection pls relative">
+                <div class="field pas">
+                    <input id="activeBank_mobile" type="checkbox" name="status" value="active" />
+                    <div class="label plm"><label for="activeBank" class="smallText active-status">Active Only</label></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-offset-3 col-xs-12 resultscriteriaheader" id="searchCriteria">
+            <span id="js-searchCriteria"></span>
+        </div>
+        <div class="col-sm-offset-3 col-xs-12" id="refineCriteria">
+
+        </div>
+        <div class="row">
+            <div id="resultsFilterContainer" class="col-sm-3 hidden-xs" style="margin-top:-22px;">
+                <!--#include file="FF_Bank_Search_Results.htm" -->
+            </div>
+            <div id="main_content" role="main">
+                <div  id="searchResultContainer" class="col-sm-9 col-xs-12" style="border: 1px solid #d7d7d7; margin-top:5px;">
+                    <div class="pam pbl">
+                        <div id="showSearchResults">
+                            <table id="results" class="results table table-condensed table-striped table-responsive table-bordered resultTableContainer js-bankdatatable" summary="BankFind search results">
+                                <thead class="resultTableHead">
+                                    <tr>
+                                        <th tabindex="129" class="essential">Bank Name</th>
+                                        <th tabindex="130" class="optional">FDIC #</th>
+                                        <th tabindex="131" class="essential">FDIC Status</th>
+                                        <th tabindex="132" class="optional">Headquarters</th>
+                                        <th tabindex="133" class="essential">Locations</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div id="showNoSearchResults">
+                            <p>Your search did not match any FDIC-insured institutions in our database.</p>
+                            <p>Suggestions:</p>
+                            <ul class="disc">
+                                <li>Check the spelling</li>
+                                <li>Type only part of the bank name</li>
+                                <li>Try more general criteria</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div tabindex="999" class="panel-footer hidden-print">
+        <!--#include virtual="/responsive/app_header_and_footer/footer/footer.html" -->
+    </div><!--End panel footer-->
+</div>

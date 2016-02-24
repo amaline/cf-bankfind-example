@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge 9">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>FDIC: BankFind Search Details</title>
+
+        <!-- This APP_VERSION is set to date time during development so pages are never cached.  This will cause
+            a performance problem, though. So just before deploying  to new environment change APP_VERSION to some
+            number higher than what is on server.  This will force the browsers of all users who visit the site, to grab the new code, but only
+            once. -->
+        <script>var APP_VERSION = 55;</script>
+        <!-- Using scripts to generate reference to CSS and JS files with a version number so browsers don't cache them -->
+       
+        <script src="js/modernizr/modernizr.min.js"></script>
+        <script src="js/respond/respond.min.js"></script>	<!-- Allows IE8 and lower to response to CSS media queries -->
+        <script src="js/jquery/jquery-1.11.3.min.js"></script>
+        <script src="js/jqueryui/jquery-ui-1.9.2.custom.min.js"></script> <!-- For autocomplete and datepicker -->
+        <!--Bootstrap-->
+        <script src="js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">  <!-- Bootstrap -->
+        
+        <!-- Data tables -->
+        <link rel="stylesheet" href="css/dataTables/jquery.dataTables.min.css">
+        <script type="text/javascript" src="js/dataTables/jquery.dataTables.min.js"></script>
+        <!--Pagination 1.10.9-->
+        <script type="text/javascript" src="js/dataTables/select.js"></script>
+ 
+        <script>document.write('<link rel="stylesheet" type="text/css" href="css/lib.css?version=' + APP_VERSION + '"\><\/link>');</script>
+        <script>document.write('<link rel="stylesheet" type="text/css" href="css/app.css?version=' + APP_VERSION + '"\><\/link>');</script>
+        <script>document.write('<link rel="stylesheet" type="text/css" href="css/navBar.css?version=' + APP_VERSION + '"\><\/link>');</script>
+        <script>document.write('<script type="text/javascript" src="js/common.js?version=' + APP_VERSION + '"\><\/script>');</script>
+  
+        <style>
+            .container {
+                padding: 0px;
+               
+            }
+        </style>
+  
+	</head>
+
+	<body>
+        <div id="site-container" class="container">
+            <div id="site-grid-container">
+                <div id="header-container" role="banner">
+                    <!--#include virtual="/responsive/app_header_and_footer/header/header.html"-->
+                </div>
+                <div id="skipNav">
+                    <a tabindex="1" href="#content" title="skip to content">Skip Navigation</a>
+                </div>
+                <!-- The global nav menu -->
+                <!--#include file="navBar.html" -->
+                <!-- begin Bread Crumbs -->
+                <p hidden id="hmenu">Banks</p>
+                <p hidden id="hcurritem">BankFind</p>
+                <p hidden id="hhead">Bank Information</p>
+                <!-- end Bread Crumbs -->
+                <article id="content"></article>
+                <div class="panel panel-default" id="bankFindDetails" role="main">
+                    <div class="row hidden-print">
+                        <a tabindex="126" class="cs-fll" id="js-goBackToSearchResults" href="#">
+                            <span>Return to BankFind Results</span>
+                        </a>
+                    </div>
+                    <div class="row resultsPageHead">
+                        <div class="col-md-9">
+                            <span class="cssPageTitle">Bank Information</span>
+                        </div>
+                        <div class="col-md-3 hidden-xs hidden-print">
+                            <a tabindex="127" id="exportDetailsButton">
+                                <img src="images/download-Normal.png" alt="download" class="cssIconWrapper printExportDetailsButton pull-right">
+                            </a>
+                            <a tabindex="128" id="printDetailsButton" class="cssIconWrapper printExportDetailsButton pull-right" onclick="window.print()">
+                                <img src="images/print-Normal.png" alt="print" class="cssIcon">
+                            </a>
+                        </div>
+                    </div>
+                     <div class="panel-body" style="padding-top:5px;">
+                            <div id="contentLoadingDiv" class="cs-txtc mvl">
+                                <h2>Loading...</h2>
+                                <img class="cs-imagec" width="48" height="48" alt="Animated Loading GIF" src="./images/bar-circle.gif">
+                            </div>
+                            <div id="bankDetails" style="display: none">
+                                <div class="row-fluid" id="name">
+                                    <h4 style="margin-left:1px;">
+                                        <span class="tmpl-name"></span> - <span class="active-status tmpl-status"></span>
+                                        <span id="headerCertNumber"> (FDIC # <span class="tmpl-certNumber"></span>)</span>
+                                        <span style="padding-left:3px;" id="date" class="js-inactiveAsOfSince"></span>
+                                        <span style="padding-left:3px;" id="insuredDate" class="tmpl-insuredDate"></span><span id="inactiveDate" class="tmpl-inactiveDate inactive ">
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="otherBankInfo">
+                              
+                                <div class='renamedBank cs-hide'>
+                                    <h4>
+                                        <span class="tmpl-name"></span> was renamed to
+                                        <span class="tmpl-legalName js-toCurrentBankDetailLinkByCert"></span>
+                                    </h4>
+                                </div>
+                                <div class='uninsuredBank cs-hide'>
+                                    <h4><span class="tmpl-name"></span> voluntarily relinquished FDIC insurance</h4>
+                                </div>
+                                <div class='changeCert cs-hide'>
+                                    <h4>Status: <span class="tmpl-name"></span> had a legal change made to the FDIC Certificate # on <span id="inactiveDate" class="tmpl-inactiveDate"></span>. The new FDIC Certificate # is <span class="tmpl-acqCert"></span>.</h4>
+                                </div>
+                                <div class='mergedBankwga cs-hide'>
+                                    <h4><span class=" tmpl-name"></span> was acquired with government assistance</h4>
+                                </div>
+                                <div class='mergedBankwOga cs-hide'>
+                                    <h4><span class="tmpl-name"></span> was merged or acquired without government assistance</h4>
+                                </div>
+                                <div class='closedBankwga cs-hide'>
+                                    <h4><span class="tmpl-name"></span> was closed with government assistance</h4>
+                                </div>
+                                <div class='closedBankwOga cs-hide'>
+                                    <h4><span class="tmpl-name"></span> was closed without government assistance</h4>
+                                </div>
+                                <div class='foreignUSBranchBankOfChina cs-hide'>
+                                    <span class="cs-fontb">
+                                        <span class="cs-textUnderline">NOTE</span>: Bank of China, New York, NY (FDIC Cert# 33652) and Bank of China, New York, NY (FDIC Cert# 33653)
+                                        are branches of the same banking institution.
+                                    </span> Therefore, deposits held in <span class="cs-fontb">
+                                        these two branches do NOT receive separate
+                                        FDIC insurance coverage.
+                                    </span> Deposits held in the same capacity at each office would be added together prior to applying the insurance limit
+                                    for that ownership type.
+                                </div>
+                                <div class='foreignUSBranchBankOfIndia cs-hide'>
+                                    <span class="cs-fontb">
+                                        <span class="cs-textUnderline">NOTE</span>: State Bank of India, New York, NY (FDIC Cert# 33682) and State Bank of India, Chicago, IL (FDIC Cert# 33664)
+                                        are branches of the same banking institution.
+                                    </span> Therefore, deposits held in <span class="cs-fontb">
+                                        these two branches do NOT receive separate
+                                        FDIC insurance coverage.
+                                    </span> Deposits held in the same capacity at each office would be added together prior to applying the insurance limit
+                                    for that ownership type.
+                                </div>
+                                    <h4 class="js-demDate">Data as of: <span class="tmpl-asOfDate"></span></h4>
+                            </div>
+                            <div>
+                                <!--#include file="overview_details.html" -->
+                            </div>
+                            </div>
+                            <div id="tabCategories" class="row hidden-print" role="tablist">
+                                <!-- Horizontal Tabs-->
+                                <div id="dfHorizontalTabs" class="dfHorizontalTabs col-md-12 col-xs-12">
+                                    <ul class="nav nav-pills df_panels" role="navigation">
+                                        <li id="locationsTab" class="tabOn js-detailTab top_panels active" role="presentation"><a tabindex="129" href="#locations" aria-controls="locations" role="tab" data-toggle="tab">Locations</a></li>
+                                        <li id="historyTab" class="tabOff js-detailTab top_panels" role="presentation"><a tabindex="130" href="#history" aria-controls="History" role="tab" data-toggle="tab">History</a></li>
+                                        <li id="identificationsTab" class="tabOff  js-detailTab top_panels" role="presentation"><a tabindex="131" href="#identifications" aria-controls="identifications" role="tab" data-toggle="tab">Identifications</a></li>
+                                        <li id="financialsTab" class=" clearfix tabOff js-detailTab top_panels" role="presentation"><a tabindex="132" href="#financials" aria-controls="financials" role="tab" data-toggle="tab">Financials</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="container-fluid dtls-container" role="tabpanel">
+                                <!--#include file="locations_details.html" -->
+                                <!--#include file="history_details.html" -->
+                                <!--#include file="identifications_details.html" -->
+                                <!--#include file="financials_details.html" -->
+                                <div id="noBankDetails" class="cs-hide" style="display:none;">
+                                    <h1 id="name"><span class="cs-fontb tmpl-name"></span><span id="headerCertNumber"> (FDIC #: <span class="tmpl-certNumber"></span>)</span></h1>
+                                    <h3 id="status">There are no details available for this financial institution.</h3>
+                                    <h5 class="pts"><a id="js-goBack" title="Go back to previous page" href="#">Go Back To Previous Page</a></h5>
+                                </div>
+                            </div>
+                        </div><!--End of panel body-->
+                    <div tabindex="999" class="panel-footer hidden-print">
+                        <!--#include virtual="/responsive/app_header_and_footer/footer/footer.html" -->
+                    </div><!--End panel footer-->
+                </div><!--End of site panel-->
+            </div><!--End of site-grid container-->
+        </div><!--End of site container-->
+       
+        <script>document.write('<script type="text/javascript" src="js/detail.js?version=' + APP_VERSION + '"\><\/script>');</script>
+        <script>document.write('<script type="text/javascript" src="js/search.js?version=' + APP_VERSION + '"\><\/script>');</script>
+        <script>document.write('<script type="text/javascript" src="js/faceted_filter.js?version=' + APP_VERSION + '"\><\/script>');</script>
+        <script>document.write('<script type="text/javascript" src="js/navBar.js?version=' + APP_VERSION + '"\><\/script>');</script>
+	</body>
+</html>

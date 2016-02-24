@@ -1,0 +1,645 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=9, edge">
+    <title>Global Navigation</title>
+    <script src="js/navBar.js"></script>
+    <link rel="stylesheet" href="css/navBar.css">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.homePage').each(function () {
+                var currentHref = $(this).attr('href');
+                $(this).attr('href', MyHome + "/bankfind" + currentHref);
+            });
+            $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                $(this).parent().siblings().removeClass('open');
+                $(this).parent().toggleClass('open');
+            });
+
+            //When a menu item <a href> is selected
+            $('.navbar-nav li a').click(function (event) {
+                if (IsMobile()) return;
+
+                var id = $(this).attr('id');
+                var linkName = $(this).text();  //link name
+                var url = $(this).attr('href') //get the target url
+
+                if (id !== undefined && id != "") {
+                    CurrentMemuItem = linkName;
+                    // PrintMessage("id/linkName: " + id + "/" + linkName + "; url: " + url);
+
+                    var linkNameTmp = linkName.replace(/&/g, "").replace(/ /g, "");
+                    // PrintMessage("id/linkNameTmp: " + id + "/" + linkNameTmp + ", linkName:" + linkName);
+                    if (linkNameTmp.indexOf(id) >= 0) {//root level
+                        RootPath = id;
+                        if (RootPath.indexOf("FDIC") >= 0) {
+                            RootPath += " .gov";
+                        }
+                    } else {
+                        var idx = Math.floor(parseInt(id) / 100);
+                        RootPath = NavBarItemArray[idx];
+
+                        //PrintMessage('id  ' + id + '; idx  ' + idx);
+                        //PrintMessage("id: " + id + ", linkName:" + linkName + ", url= " + url + ", menu index= " + idx + ", RootPath= " + RootPath);
+                            // SetParentActive(RootPath); //Set the parent to active
+                    }
+
+                    //  UpdateBreadCrumb(""); //Update Bread Crumb
+                }
+
+            }); //When a menu item <a href> is selected
+
+            //Mouse over the first level of menu items, hight light the first child
+            //.intro for the introductory text for the menu item
+            $('.intro').mouseover(function () {
+                if (IsMobile()) return;
+                var linkName = $(this).text();  //link name
+
+                if (linkName !== undefined && linkName != "") {
+                        var showSlidePanel = false;
+                        linkName = linkName.substring(0, 20); //first 20 characters only
+                    if (linkName.indexOf("FDIC") >= 0) {
+                        MouseOverFdicFirstChild();
+                    } else {
+                            var firstChild;
+                        if (linkName.indexOf("Banks") >= 0) {
+                            firstChild = $('.navbar-nav li:nth-child(2) li a:first-child');
+                                showSlidePanel = true;
+                        } else if (linkName.indexOf("Reports & Analysis") >= 0) {
+                            firstChild = $('.navbar-nav li:nth-child(3) li a:first-child');
+                                showSlidePanel = true;
+                        } else if (linkName.indexOf("Reference Tables") >= 0) {
+                            firstChild = $('.navbar-nav li:nth-child(4) li a:first-child');
+                                showSlidePanel = true;
+                        } else if (linkName.indexOf("Data Download") >= 0) {
+                            firstChild = $('.navbar-nav li:nth-child(5) li a:first-child');
+                                showSlidePanel = true;
+                        }
+
+                            if (showSlidePanel) {
+                            firstChild.first().css({ "color": "#020202", "background-color": "#d5e6f6" }); //added 12/13/15
+                            ShowSlidePanel(firstChild);
+                        }
+                    }
+                }
+            });
+
+            //on focus in keyboard access
+            // $('.navbar-nav > li:not(:last-child) > a').focusin(function () {
+            $('.intro').focusin(function () {
+                if (IsMobile()) return;
+
+                var linkName = $(this).text();  //link name
+                if (linkName !== undefined && linkName != "") {
+                        linkName = linkName.substring(0, 20); //first 20 characters only
+                    if (linkName.indexOf("FDIC") >= 0) {
+                        MouseOverFdicFirstChild();
+                    } else {
+                            MouseOverNonFdicFirstChild();
+                        }
+                    }
+                });
+    
+                $('.navbar-nav > li:last-child > a').focusout(function () {
+                    $(this).css({ "background-color": "#537291","color": "#ffffff" });
+                });
+
+                //add border to top and bottom when tabbing over top level menu items
+                $('.navbar-nav > li > a').focusin(function () {
+                    $(this).css({ "border-top": "2px solid #0000FF", "border-bottom": "2px solid #0000FF"});
+                });
+
+                $('.navbar-nav > li > a').focusout(function () {
+                    $(this).css({ "border-top": "none", "border-bottom": "none" });
+                });
+
+                $('#BankFind').focusin(function () {
+                    $(this).parent().siblings().removeClass('open');
+                    $(this).parent().toggleClass('open');
+                    $(this).css({ "background-color": "#d5e6f6", "color": "#020202" });
+                });
+
+                $('#BankFind').click(function (event) {
+                    var url = MyHome + "/bankfind/index.html";
+                    if (url !== undefined && url != "") {
+                        location.href(url);
+                    }
+                });
+
+                //508
+                $('#BankFind').on('keyup', function (event) {
+                    if (event.keyCode == 13) {//enter key pressed
+                        var url = MyHome + "/bankfind/index.html";
+                        if (url !== undefined && url != "") {
+                            location.href(url);
+                    }
+                }
+            });
+
+                //Mouse over FDIC tab
+                $('.navbar-nav li:first-child a').mouseover(function () {
+                    MouseOutFdicFirstChild(); //same effect as "mouse out" 1st child of FDIC tab
+                });
+
+            //Mouse over the 2nd level menu items, show the slide out panel.
+            $('.intro li a').mouseover(function () {
+                ShowSlidePanel($(this));
+            });
+
+            $('.intro li a').focusin(function () {
+                ShowSlidePanel($(this));
+            });
+
+            //hide the slide-out panel
+            $('.navbar-nav li a').mouseout(function () {
+                HideSlidePanel();
+            });
+
+            $('.navbar-nav li a').focusout(function () {
+                HideSlidePanel();
+            });
+
+            //mouse over the 1st child of the dropdown menu of the 1st menu item (FDIC)
+            $('.navbar-nav li:first-child li:first-child a').mouseover(function () {
+                MouseOverFdicFirstChild();
+            });
+
+            $('.navbar-nav li:first-child li:first-child a').focusin(function () {
+                MouseOverFdicFirstChild();
+            });
+
+            //mouse out the 1st child of the dropdown menu of the 1st menu item (FDIC)
+            $('.navbar-nav li:first-child li:first-child a').mouseout(function () {
+                MouseOutFdicFirstChild();
+            });
+
+            $('.navbar-nav li:first-child li:first-child a').focusout(function () {
+                MouseOutFdicFirstChild();
+            });
+
+            //mouse over the 1st child of the dropdown menu of the 2nd to last menu items
+            $('.navbar-nav li:nth-child(n+2) li:first-child a').mouseover(function () {
+                MouseOverNonFdicFirstChild();
+            });
+
+            $('.navbar-nav li:nth-child(n+2) li:first-child a').focusin(function () {
+                MouseOverNonFdicFirstChild();
+            });
+
+            //mouse out the 1st child of the dropdown menu of the 2nd to last menu items
+            $('.navbar-nav li:nth-child(n+2) li:first-child a').mouseout(function () {
+                MouseOutNonFdicFirstChild();
+            });
+            $('.navbar-nav li:nth-child(n+2) li:first-child a').focusout(function () {
+                MouseOutNonFdicFirstChild();
+            });
+
+            //last child first level
+            $('.navbar-nav > li:last-child > a').focusin(function () {
+                $("#dropdown-toggle").toggle();
+            });
+
+            //When the Bank Data Guide link is clicked
+            $("#bankDataGuideLink").on('click', function () {
+                //window.location = bankDataGuideUrl;
+
+                //Display target page in a iFrame
+                $('#iframeID').attr({ src: bankDataGuideUrl });
+            });
+
+            //Initial
+            InitSetup();
+
+        }); //end of $(document).ready()
+
+    </script>
+
+</head>
+<body>
+    <nav class="navbar navbar-static-top marginBottom-0 navbar-default" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-FDIC-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand visible-xs" href="#" target="_blank">Navigation</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-FDIC-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li role="presentation" class="dropdown hidden-xs hidden-print">
+                    <a tabindex="2" role="menu" id="FDIC" title="Federal Deposit Insurance Corporation" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"> FDIC <span class="caret"></span></a>
+                    <ul aria-labelledby="FDIC" role="menuitem" class="dropdown-menu global-menu">
+                        <li role="presentation"><a tabindex="3" role="menuitem" id="101" title="FDIC Home page" href="https://fdic.gov"> Home </a></li>
+                        <li role="presentation"><a tabindex="4" role="menuitem" id="102" title="Deposit Insurance page" href="https://fdic.gov/deposit"> Deposit Insurance </a></li>
+                        <li role="presentation"><a tabindex="5" role="menuitem" id="103" title="Consumer Protection page" href="https://fdic.gov/consumers"> Consumer Protection </a></li>
+                        <li role="presentation"><a tabindex="6" role="menuitem" id="104" title="Industry Analysis page" href="https://fdic.gov/bank"> Industry Analysis </a></li>
+                        <li role="presentation"><a tabindex="7" role="menuitem" id="105" title="Regulations page" href="https://fdic.gov/regulations"> Regulations & Examinations </a></li>
+                        <li role="presentation"><a tabindex="8" role="menuitem" id="106" title="Institution and Assests Sale page" href="https://fdic.gov/buying"> Institution & Assets Sales </a></li>
+                        <li role="presentation"><a tabindex="9" role="menuitem" id="107" title="News and Events page" href="https://fdic.gov/news"> News & Events </a></li>
+                        <li role="presentation"><a tabindex="10" role="menuitem" id="108" title="About FDIC" href="https://fdic.gov/about"> About FDIC </a></li>
+                    </ul>
+                </li>
+                <li role="presentation" class="dropdown">
+                    <a tabindex="11" role="menuitem" id="Banks" href="#" class="dropdown-toggle intro" data-toggle="dropdown" aria-haspopup="true">
+                        Banks <span class="caret"></span>
+                        <span class="sr-only"><em>BankFind.</em> Learn if your bank is insured, View locations, Review a bank's  history, Get summary information.</span>
+                    </a>
+                    <ul aria-labelledby="Banks" role="menu" class="dropdown-menu global-menu intro">
+                        <li role="presentation">
+                            <a tabindex="12" class="homePage" role="menuitem" id="201" href="/index.html">
+                                BankFind
+                                <span class="sr-only"><em>BankFind.</em> Learn if your bank is insured, View locations, Review a bank's  history, Get summary information.</span>
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a tabindex="13" class="js-addLegacyAppPrefix" role="menuitem" id="202" href="/idasp/advSearchLanding.asp">
+                                Details and Financials - ID
+                                <span class="sr-only">
+                                    <em>Institution Directory (ID).</em>Use more criteria to, Find FDIC Insured Banks and their locations, Get comprehensive financial or demographic reports,
+                                    Get current and historical data, Find groups of banks, Find a bank holding company (BHC).
+                                </span>
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a tabindex="14" class="js-addLegacyAppPrefix" role="menuitem" id="203" href="/sod/sodInstBranch.asp?barItem=1">
+                                Branch Office Deposits
+                                <span class="sr-only">
+                                    <em>Summary of Deposits (SOD). </em>Results of the annual survey of branch office deposits as of June 30th  for all FDIC-insured institutions.
+                                    Data is available by institution and/or geographic area in reports or data downloads
+                                </span>
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a tabindex="15" class="js-addSEAFAppPrefix" role="menuitem" id="204" href="/fcxweb/efr/index.html">
+                                Securities Exchange Act Filings
+                                <span class="sr-only">
+                                    <em>Securities Exchange Act Filings. </em>This system contains two groups of securities disclosure filings:
+                                    Beneficial ownership report filings on Forms 3, 4, and 5 by directors, officers, and principal shareholders of depository institutions.
+                                    Other securities disclosure documents filed by or pertaining to FDIC-supervised depository institutions with a class of securities registered under the Exchange Act.
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li role="presentation" class="dropdown">
+                    <a tabindex="16" role="menuitem" id="ReportsAnalysis" href="#" class="dropdown-toggle intro" data-toggle="dropdown" aria-haspopup="true">
+                        Reports & Analysis <span class="caret"></span>
+                        <span class="sr-only">
+                            <em>Summary of Deposits (SOD). </em>Based on the annual survey of branch office deposits as of
+                            June 30th, market share reports are available by geographic area (Deposit Market Share Report, Pro Forma HHI) or by
+                            institution (Market Presence, Growth Rates).
+                        </span>
+                    </a>
+                    <ul aria-labelledby="ReportsAnalysis" role="menu" class="dropdown-menu global-menu intro">
+                        <li role="presentation">
+                            <a tabindex="17" class="js-addLegacyAppPrefix" role="menuitem" id="301" href="/sod/sodMarketBank.asp?barItem=2">
+                                Deposit Market Share Reports
+                                <span class="sr-only">
+                                    <em>Summary of Deposits (SOD). </em>Based on the annual survey of branch office deposits as of
+                                    June 30th, market share reports are available by geographic area (Deposit Market Share Report, Pro Forma HHI) or by
+                                    institution (Market Presence, Growth Rates).
+                                </span>
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a tabindex="18" class="js-addLegacyAppPrefix" role="menuitem" id="302" href="/sdi/main.asp?formname=compare">
+                                Comparison Reports - SDI
+                                <span class="sr-only">
+                                    <em>Statistics on Depository Institutions (SDI). </em>Financial data from  1992 to present,
+                                    Compare up to four columns. Create custom peers, reports, and downloads. Predefined industry reports.
+                                </span>
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a tabindex="19" class="js-addLegacyAppPrefix" role="menuitem" id="303" href="/sdi/main.asp?formname=standard">
+                                Standard Industry Reports - SDI
+                                <span class="sr-only">
+                                    <em>Statistics on Depository Institutions (SDI). </em>Detailed aggregate financial information for common standard peer groups.
+                                    Based on legacy Statistics on Banking (SOB) reports.
+                                </span>
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a tabindex="20" class="js-addLegacyAppPrefix" role="menuitem" id="304" href="/hsob/SelectRpt.asp?EntryTyp=30&Header=1">
+                                Bank Failures
+                                <span class="sr-only">
+                                    <em>Historical Statistics on Banking (HSOB). </em>A complete look historically of bank failures and assistance
+                                    transactions of all FDIC-insured institutions back to 1934.
+                                </span>
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a tabindex="21" class="js-addLegacyAppPrefix" role="menuitem" id="305" href="/roc/index.asp">
+                                Reports of Structure Changes
+                                <span class="sr-only">
+                                    <em>Reports of Structure Changes (ROC). </em>Searchable database for structure transactions (e.g., new institution, mergers, closings) for institutions
+                                    or offices for a specific date, date range, or quarter date based on either the processed date or effective date.
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li role="presentation" class="dropdown">
+                    <a tabindex="22" role="menuitem" id="ReferenceTables" href="#" class="dropdown-toggle intro" data-toggle="dropdown" aria-haspopup="true">
+                        Reference Tables  <span class="caret"></span>
+                        <span class="sr-only">
+                            <em>Summary of Deposits (SOD). </em>Standardized tables provide aggregate results of the annual survey of branch office deposits (SOD) as of June 30th.
+                            National, regional, state and county data are available for data back to 1994.
+                        </span>
+                    </a>
+                    <ul aria-labelledby="ReferenceTables" role="menu" class="dropdown-menu global-menu intro">
+                        <li role="presentation">
+                            <a tabindex="23" class="js-addLegacyAppPrefix" role="menuitem" id="401" href="/sod/sodSummary.asp?barItem=3">
+                                Deposit Summary Tables
+                                <span class="sr-only">
+                                    <em>Summary of Deposits (SOD). </em>Standardized tables provide aggregate results of the annual survey of branch office deposits (SOD) as of June 30th.
+                                    National, regional, state and county data are available for data back to 1994.
+                                </span>
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a tabindex="24" class="js-addLegacyAppPrefix" role="menuitem" id="402" href="/hsob/SelectRpt.asp?EntryTyp=10&Header=1">
+                                Annual Financial Data
+                                <span class="sr-only">
+                                    <em>Historical Statistics on Banking (HSOB). </em>Annual summary of financial and structural data back to 1934 for all FDIC-insured institutions.
+                                    These data can be used to identify and analyze long-term trends and to develop benchmarks to evaluate the current condition of the banking
+                                    and thrift industries. Commercial bank data back to 1934. Savings institution data back to 1984.
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li role="presentation" class="dropdown">
+                    <a tabindex="25" role="menuitem" id="DataDownload" href="#" class="dropdown-toggle intro" data-toggle="dropdown" aria-haspopup="true">
+                        Data Download <span class="caret"></span>
+                        <span class="sr-only">
+                            <em>Statistics on Depository Institutions (SDI). </em>Quarterly financial data for all FDIC-Insured institutions. Predefined downloadable ZIP files contains all SDI Reports
+                            and report items. Each ZIP file contains data for one reporting quarter.
+                        </span>
+                    </a>
+                    <ul aria-labelledby="DataDownload" role="menu" class="dropdown-menu global-menu intro">
+                        <li role="presentation">
+                            <a tabindex="26" class="js-addLegacyAppPrefix" role="menuitem" id="501" href="/sdi/download_large_list_outside.asp">
+                                Quarterly Financial Data - SDI
+                                <span class="sr-only">
+                                    <em>Statistics on Depository Institutions (SDI). </em>Quarterly financial data for all FDIC-Insured institutions. Predefined downloadable ZIP files contains all SDI Reports
+                                    and report items. Each ZIP file contains data for one reporting quarter.
+                                </span>
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a tabindex="27" class="js-addLegacyAppPrefix" role="menuitem" id="502" href="/sdi/main.asp?formname=customddownload">
+                                Custom Financial Data - SDI
+                                <span class="sr-only">
+                                    <em>Statistics on Depository Institutions (SDI). </em>Quarterly financial data for all FDIC-Insured institutions. Select report items from any SDI Report.
+                                    Select one or many FDIC Insured Institutions. Select time periods 1992 to present.
+                                </span>
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a tabindex="28" class="js-addLegacyAppPrefix" role="menuitem" id="503" href="/idasp/advSearch_warp_download_all.asp?intTab=1">
+                                Institutions & Locations - ID
+                                <span class="sr-only">
+                                    <em>Institution Directory (ID). </em>Predefined datasets for all FDIC-insured institutions (Updated weekly):
+                                    Current list of all institutions. Current locations for all institutions (branches and main offices).
+                                </span>
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a tabindex="29" class="js-addLegacyAppPrefix" role="menuitem" id="504" href="/idasp/advSearch_warp_download_all.asp?intTab=2">
+                                Financial Data - SDI
+                                <span class="sr-only">
+                                    <em>Predefined datasets for all FDIC-insured institutions. </em>Each of the downloadable ZIP files contains all financial items available
+                                    for all FDIC insured institutions. Each ZIP file contains data for one reporting quarter.
+                                </span>
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a tabindex="30" class="js-addLegacyAppPrefix" role="menuitem" id="505" href="/idasp/advSearch_warp_download_all.asp?intTab=4">
+                                Aggregate Time Series Data
+                                <span class="sr-only">
+                                    <em>Quarterly Banking Profile (QBP)Time Series Spreadsheets. </em>Aggregate data for all FDIC-insured institutions for each quarter
+                                    back to 1984 in downloadable Excel spreadsheet files.
+                                </span>
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a tabindex="31" class="js-addLegacyAppPrefix" role="menuitem" id="506" href="/sod/dynaDownload.asp?barItem=6">
+                                Branch Office Deposits
+                                <span class="sr-only">
+                                    <em>Branch Office Deposits. </em>Annual Summary of Deposits survey of branch office deposits as of June 30. Data is available back to 1994.
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li role="presentation" class="dropdown">
+                    <a tabindex="32" role="menuitem" id="GlobalHelp" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"> Help <span class="caret"></span></a>
+                    <!-- Parent Menu -->
+                    <ul id="helpOptions" aria-labelledby="GlobalHelp" role="menu" class="dropdown-menu global-menu">
+                        <li role="presentation">
+                            <a tabindex="33" role="menuitem" id="601" href="https://fdic.gov/bank/statistical/guide/" target="_blank"> Bank Data Guide</a>
+                        </li>
+                        <li role="presentation">
+                            <a tabindex="34" class="js-addLegacyAppPrefix" role="menuitem" id="602" href="/idasp/DIRSInfoRequest.asp" target="_blank">Questions</a>
+                        </li>
+                        <li role="presentation">
+                            <a tabindex="35" class="js-addLegacyAppPrefix" role="menuitem" id="603" href="/sdi/main.asp?formname=tutorial" target="_blank">Tutorials</a>
+                        </li>
+                        <li class="dropdown dropdown-submenu" role="presentation">
+                            <a tabindex="36" href="#" role="menuitem" id="BanksHelp" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown"> Banks</a>
+                            <ul aria-labelledby="BanksHelp" role="menu" class="dropdown-menu help-menu">
+                                <li class="dropdown-submenu dropdown" role="presentation">
+                                    <a tabindex="37" href="#" role="menuitem" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" id="604">BankFind</a>
+                                    <ul aria-labelledby="604" role="menu" class="dropdown-menu help-menu">
+                                        <li role="presentation">
+                                            <a tabindex="38" class="homePage" role="menuitem" href="/glossary.html" target="_blank"> BankFind Glossary</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown dropdown-submenu" role="presentation">
+                                    <a tabindex="39" href="#" class="dropdown-toggle" data-toggle="dropdown" role="menuitem" aria-haspopup="true" id="605">Details and Financials - ID</a>
+                                    <ul aria-labelledby="605" role="menu" class="dropdown-menu help-menu">
+                                        <li role="presentation"><a tabindex="40" class="js-addLegacyAppPrefix" role="menuitem" id="918" href="/idasp/advInfoPage.asp?formname=sitemap" target="_blank">Glossary</a></li>
+                                        <li role="presentation"><a tabindex="41" class="js-addLegacyAppPrefix" role="menuitem" id="919" href="/idasp/loadWhatsNew.asp" target="_blank">  What's New and Data Availability</a></li>
+                                        <li role="presentation"><a tabindex="42" class="js-addLegacyAppPrefix" role="menuitem" id="920" href="/idasp/advInfoPage.asp?formname=disclaimer" target="_blank"> Disclaimer and Methodology</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown dropdown-submenu" role="presentation">
+                                    <a tabindex="43" href="#" role="menuitem" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" id="610"> Branch Office Deposits</a>
+                                    <ul aria-labelledby="610" role="menu" class="dropdown-menu help-menu">
+                                        <li role="presentation"><a tabindex="44" class="js-addLegacyAppPrefix" role="menuitem" id="611" href="/sod/sodHelp.asp?barItem=8" target="_blank">  Help</a></li>
+                                        <li role="presentation"><a tabindex="45" class="js-addLegacyAppPrefix" role="menuitem" id="612" href="/sod/sodDataAvailability.asp" target="_blank">  Data Availability</a></li>
+                                        <li role="presentation"><a tabindex="46" role="menuitem" id="613" href="https://www.fdic.gov/news/news/financial/2015/fil15024.html" target="_blank">  Financial Institution Letters</a></li>
+                                        <li role="presentation"><a tabindex="47" class="js-addLegacyAppPrefix" role="menuitem" id="614" href="/sod/pdf/SOD_Instructions.pdf" target="_blank">   Reporting Instructions</a></li>
+                                        <li role="presentation"><a tabindex="48" class="js-addLegacyAppPrefix" role="menuitem" id="615" href="/sod/sod_frm_inst.asp" target="_blank"> Survey Form Worksheet</a></li>
+                                        <li role="presentation"><a tabindex="49" role="menuitem" id="616" href="https://www2.fdicconnect.gov" target="_blank">  FDIC Connect Business Center</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown dropdown-submenu" role="presentation">
+                            <a tabindex="50" href="#" role="menuitem" id="ReportsAnalysisHelp" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"> Reports & Analysis </a>
+                            <ul aria-labelledby="ReportsAnalysisHelp" role="menu" class="dropdown-menu help-menu">
+                                <li role="presentation" class="dropdown dropdown-submenu">
+                                    <a tabindex="51" href="#" role="menuitem" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" id="617">  Deposit Market Share Reports</a>
+                                    <ul aria-labelledby="617" role="menu" class="dropdown-menu help-menu">
+                                        <li role="presentation"><a tabindex="52" class="js-addLegacyAppPrefix" role="menuitem" id="618" href="/sod/sodHelp.asp?barItem=8" target="_blank">  Help</a></li>
+                                        <li role="presentation"><a tabindex="53" class="js-addLegacyAppPrefix" role="menuitem" id="619" href="/sod/sodDataAvailability.asp" target="_blank">  Data Availability</a></li>
+                                        <li role="presentation"><a tabindex="54" role="menuitem" id="620" href="https://www.fdic.gov/news/news/financial/2015/fil15024.html" target="_blank">  Financial Institution Letters</a></li>
+                                        <li role="presentation"><a tabindex="55" class="js-addLegacyAppPrefix" role="menuitem" id="621" href="/sod/pdf/SOD_Instructions.pdf" target="_blank">   Reporting Instructions</a></li>
+                                        <li role="presentation"><a tabindex="56" class="js-addLegacyAppPrefix" role="menuitem" id="622" href="/sod/sod_frm_inst.asp" target="_blank"> Survey Form Worksheet</a></li>
+                                        <li role="presentation"><a tabindex="57" role="menuitem" id="623" href="https://www2.fdicconnect.gov" target="_blank">  FDIC Connect Business Center</a></li>
+                                    </ul>
+                                </li>
+                                <li role="presentation" class="dropdown dropdown-submenu">
+                                    <a tabindex="58" href="#" role="menuitem" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" id="624"> Comparison Reports - SDI</a>
+                                    <ul aria-labelledby="624" role="menu" class="dropdown-menu help-menu">
+                                        <li role="presentation"><a tabindex="59" class="js-addLegacyAppPrefix" role="menuitem" id="625" href="/sdi/main.asp?formname=glossary" target="_blank">  Glossary</a></li>
+                                        <li role="presentation"><a tabindex="60" class="js-addLegacyAppPrefix" role="menuitem" id="626" href="/sdi/homehelp.asp?SystemForm=ID&HelpItem=FAQ" target="_blank"> Frequently Asked Questions</a></li>
+                                        <li role="presentation"><a tabindex="61" class="js-addLegacyAppPrefix" role="menuitem" id="627" href="/sdi/loadwhatsnew.asp" target="_blank">  What's New & Data Availability</a></li>
+                                        <li role="presentation">
+                                            <a tabindex="62" class="js-addLegacyAppPrefix" role="menuitem" id="628" href="/sdi/main.asp?formname=disclaimer" target="_blank">Disclaimer & Methodology</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li role="presentation" class="dropdown dropdown-submenu">
+                                    <a tabindex="63" href="#" role="menuitem" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" id="630"> Standard Industry Reports - SDI</a>
+                                    <ul aria-labelledby="630" role="menu" class="dropdown-menu help-menu">
+                                        <li role="presentation"><a tabindex="64" class="js-addLegacyAppPrefix" role="menuitem" id="631" href="/sdi/main.asp?formname=glossary" target="_blank">  Glossary</a></li>
+                                        <li role="presentation"><a tabindex="65" class="js-addLegacyAppPrefix" role="menuitem" id="632" href="/sdi/homehelp.asp?SystemForm=ID&HelpItem=FAQ" target="_blank"> Frequently Asked Questions</a></li>
+                                        <li role="presentation"><a tabindex="66" class="js-addLegacyAppPrefix" role="menuitem" id="633" href="/sdi/loadwhatsnew.asp" target="_blank">  What's New & Data Availability</a></li>
+                                        <li role="presentation">
+                                            <a tabindex="67" class="js-addLegacyAppPrefix" role="menuitem" id="634" href="/sdi/main.asp?formname=disclaimer" target="_blank">Disclaimer & Methodology</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li role="presentation" class="dropdown dropdown-submenu">
+                                    <a tabindex="68" href="#" role="menuitem" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" id="636">  Bank Failures </a>
+                                    <ul aria-labelledby="636" role="menu" class="dropdown-menu help-menu">
+                                        <li role="presentation"><a tabindex="69" class="js-addLegacyAppPrefix" role="menuitem" id="637" href="/hsob/Help.asp?EntryTyp=60&Header=1" target="_blank"> Help</a></li>
+                                        <li role="presentation"><a tabindex="70" class="js-addLegacyAppPrefix" role="menuitem" id="638" href="/hsob/data_availability.asp" target="_blank">   Data Availability</a></li>
+                                        <li role="presentation"><a tabindex="71" class="js-addLegacyAppPrefix" role="menuitem" id="639" href="/hsob/Helpindex.asp" target="_blank"> Index</a></li>
+                                    </ul>
+                                </li>
+                                <li role="presentation" class="dropdown dropdown-submenu">
+                                    <a tabindex="72" href="#" role="menuitem" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" id="640"> Reports of Structure Changes </a>
+                                    <ul aria-labelledby="640" role="menu" class="dropdown-menu help-menu">
+                                        <li role="presentation"><a tabindex="73" class="js-addLegacyAppPrefix" role="menuitem" id="641" href="/roc/bimonth.asp" target="_blank"> Glossary</a></li>
+                                        <li role="presentation"><a tabindex="74" class="js-addLegacyAppPrefix" role="menuitem" id="642" href="/roc/data_availibility.asp" target="_blank">  Data Availability</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown dropdown-submenu" role="presentation">
+                            <a tabindex="75" href="#" role="menuitem" class="dropdown-toggle" data-toggle="dropdown" id="ReferenceTablesHelp" aria-haspopup="true"> Reference Tables</a>
+                            <ul aria-labelledby="ReferenceTablesHelp" role="menu" class="dropdown-menu help-menu">
+                                <li role="presentation" class="dropdown dropdown-submenu">
+                                    <a tabindex="76" href="#" role="menuitem" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" id="643"> Deposit Summary Tables</a>
+                                    <ul aria-labelledby="643" role="menu" class="dropdown-menu help-menu">
+                                        <li role="presentation"><a tabindex="77" class="js-addLegacyAppPrefix" role="menuitem" id="644" href="/sod/sodHelp.asp?barItem=8" target="_blank">  Help</a></li>
+                                        <li role="presentation"><a tabindex="78" class="js-addLegacyAppPrefix" role="menuitem" id="645" href="/sod/sodDataAvailability.asp" target="_blank">  Data Availability</a></li>
+                                        <li role="presentation"><a tabindex="79" role="menuitem" id="646" href="https://www.fdic.gov/news/news/financial/2015/fil15024.html" target="_blank">  Financial Institution Letters</a></li>
+                                        <li role="presentation"><a tabindex="80" class="js-addLegacyAppPrefix" role="menuitem" id="647" href="/sod/pdf/SOD_Instructions.pdf" target="_blank">   Reporting Instructions</a></li>
+                                        <li role="presentation"><a tabindex="81" class="js-addLegacyAppPrefix" role="menuitem" id="648" href="/sod/sod_frm_inst.asp" target="_blank"> Survey Form Worksheet</a></li>
+                                        <li role="presentation"><a tabindex="82" role="menuitem" id="649" href="https://www2.fdicconnect.gov" target="_blank">  FDIC Connect Business Center</a></li>
+                                    </ul>
+                                </li>
+                                <li role="presentation" class="dropdown dropdown-submenu">
+                                    <a tabindex="83" href="#" role="menuitem" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" id="650"> Annual Financial Data </a>
+                                    <ul aria-labelledby="650" role="menu" class="dropdown-menu help-menu">
+                                        <li role="presentation"><a tabindex="84" class="js-addLegacyAppPrefix" role="menuitem" id="651" href="/hsob/Help.asp?EntryTyp=60&Header=1" target="_blank"> Help</a></li>
+                                        <li role="presentation"><a tabindex="85" class="js-addLegacyAppPrefix" role="menuitem" id="652" href="/hsob/data_availability.asp" target="_blank">   Data Availability</a></li>
+                                        <li role="presentation"><a tabindex="86" class="js-addLegacyAppPrefix" role="menuitem" id="653" href="/hsob/Helpindex.asp" target="_blank"> Index</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown dropdown-submenu" role="presentation">
+                            <a tabindex="87" href="#" role="menuitem" class="dropdown-toggle" data-toggle="dropdown" id="DataDownloadHelp" aria-haspopup="true"> Data Download</a>
+                            <ul aria-labelledby="DataDownloadHelp" role="menu" class="dropdown-menu help-menu">
+                                <li role="presentation" class="dropdown dropdown-submenu">
+                                    <a tabindex="88" href="#" role="menuitem" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" id="654"> Quarterly Financial Data - SDI</a>
+                                    <ul aria-labelledby="654" role="menu" class="dropdown-menu help-menu">
+                                        <li role="presentation"><a tabindex="89" class="js-addLegacyAppPrefix" role="menuitem" id="655" href="/sdi/main.asp?formname=glossary" target="_blank">  Glossary</a></li>
+                                        <li role="presentation"><a tabindex="90" class="js-addLegacyAppPrefix" role="menuitem" id="656" href="/sdi/homehelp.asp?SystemForm=ID&HelpItem=FAQ" target="_blank"> Frequently Asked Questions</a></li>
+                                        <li role="presentation"><a tabindex="91" class="js-addLegacyAppPrefix" role="menuitem" id="657" href="/sdi/loadwhatsnew.asp" target="_blank">  What's New & Data Availability</a></li>
+                                        <li role="presentation">
+                                            <a tabindex="92" class="js-addLegacyAppPrefix" role="menuitem" id="658" href="/sdi/main.asp?formname=disclaimer" target="_blank">Disclaimer & Methodology</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li role="presentation" class="dropdown dropdown-submenu">
+                                    <a tabindex="93" href="#" role="menuitem" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" id="660">  Custom Financial Data - SDI</a>
+                                    <ul aria-labelledby="661" role="menu" class="dropdown-menu help-menu">
+                                        <li role="presentation"><a tabindex="94" class="js-addLegacyAppPrefix" role="menuitem" id="662" href="/sdi/main.asp?formname=glossary" target="_blank">  Glossary</a></li>
+                                        <li role="presentation"><a tabindex="95" class="js-addLegacyAppPrefix" role="menuitem" id="663" href="/sdi/homehelp.asp?SystemForm=ID&HelpItem=FAQ" target="_blank"> Frequently Asked Questions</a></li>
+                                        <li role="presentation"><a tabindex="96" class="js-addLegacyAppPrefix" role="menuitem" id="664" href="/sdi/loadwhatsnew.asp" target="_blank">  What's New & Data Availability</a></li>
+                                        <li role="presentation">
+                                            <a tabindex="97" class="js-addLegacyAppPrefix" role="menuitem" id="665" href="/sdi/main.asp?formname=disclaimer" target="_blank">Disclaimer & Methodology</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown dropdown-submenu" role="presentation">
+                                    <a tabindex="98" href="#" role="menuitem" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" id="667"> Institutions & Locations - ID</a>
+                                    <ul aria-labelledby="667" role="menu" class="dropdown-menu help-menu">
+                                        <li role="presentation"><a tabindex="99" class="js-addLegacyAppPrefix" role="menuitem" id="668" href="/idasp/advInfoPage.asp?formname=sitemap" target="_blank">Glossary</a></li>
+                                        <li role="presentation"><a tabindex="100" class="js-addLegacyAppPrefix" role="menuitem" id="669" href="/idasp/loadWhatsNew.asp" target="_blank">  What's New and Data Availability</a></li>
+                                        <li role="presentation"><a tabindex="101" class="js-addLegacyAppPrefix" role="menuitem" id="670" href="/idasp/advInfoPage.asp?formname=disclaimer" target="_blank"> Disclaimer and Methodology</a></li>
+                                    </ul>
+                                </li>
+                                <li role="presentation" class="dropdown dropdown-submenu">
+                                    <a tabindex="102" href="#" role="menuitem" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" id="672">  Financial Data - SDI</a>
+                                    <ul aria-labelledby="672" role="menu" class="dropdown-menu help-menu">
+                                        <li role="presentation"><a tabindex="103" class="js-addLegacyAppPrefix" role="menuitem" id="673" href="/sdi/main.asp?formname=glossary" target="_blank">  Glossary</a></li>
+                                        <li role="presentation"><a tabindex="104" class="js-addLegacyAppPrefix" role="menuitem" id="674" href="/sdi/homehelp.asp?SystemForm=ID&HelpItem=FAQ" target="_blank"> Frequently Asked Questions</a></li>
+                                        <li role="presentation"><a tabindex="105" class="js-addLegacyAppPrefix" role="menuitem" id="675" href="/sdi/loadwhatsnew.asp" target="_blank">  What's New & Data Availability</a></li>
+                                        <li role="presentation">
+                                            <a tabindex="106" class="js-addLegacyAppPrefix" role="menuitem" id="676" href="/sdi/main.asp?formname=disclaimer" target="_blank">Disclaimer & Methodology</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li role="presentation" class="dropdown dropdown-submenu">
+                                    <a tabindex="107" href="#" role="menuitem" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" id="678"> Branch Office Deposits</a>
+                                    <ul aria-labelledby="678" role="menu" class="dropdown-menu help-menu">
+                                        <li role="presentation"><a tabindex="108" class="js-addLegacyAppPrefix" role="menuitem" id="679" href="/sod/sodDownloadHelp.asp" target="_blank">  Help</a></li>
+                                        <li role="presentation"><a tabindex="109" class="js-addLegacyAppPrefix" role="menuitem" id="680" href="/sod/sodDataAvailability.asp" target="_blank">  Data Availability</a></li>
+                                        <li role="presentation"><a tabindex="110" role="menuitem" id="681" href="https://www.fdic.gov/news/news/financial/2015/fil15024.html" target="_blank">  Financial Institution Letters</a></li>
+                                        <li role="presentation"><a tabindex="111" class="js-addLegacyAppPrefix" role="menuitem" id="682" href="/sod/pdf/SOD_Instructions.pdf" target="_blank">   Reporting Instructions</a></li>
+                                        <li role="presentation"><a tabindex="112" class="js-addLegacyAppPrefix" role="menuitem" id="683" href="/sod/sod_frm_inst.asp" target="_blank"> Survey Form Worksheet</a></li>
+                                        <li role="presentation"><a tabindex="113" role="menuitem" id="684" href="https://www2.fdicconnect.gov" target="_blank">  FDIC Connect Business Center</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <!--Ending Help Menu -->
+                    </ul>
+                </li>
+                <li role="presentation" class="clearfix divider-vertical hidden-xs pull-right">
+                    <a tabindex="114" class="homepage" role="menuitem" id="BankFind" href="/bankfind/index.html"> BankFind </a>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+    <!-- start Bread Crumbs -->
+    <div id="breadCrumb" class="cssBreadCrumbContainer hidden-xs hidden-print">
+        <span id="breadCrumbPath" class="cssBreadCrumb">  </span>
+    </div>
+    <!-- end Bread Crumbs -->
+    <div id="SlidePanel" class="cssSlidePanel hidden-xs" role="contentinfo">
+        <div id="MenuTitle" class="cssMenuTitle"> </div>
+        <div id="MenuDesc" class="cssMenuDesc"> </div>
+    </div>
+
+    <!-- for testing, to be removed -->
+    <!--
+        <div id="log" class="hidden-xs" style="position:absolute; top:20px;"></div>
+    -->
+
+</body>
+</html>
